@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    /* TechSutra Theme - Dark Mode (Default) */
     --background: 222 47% 6%;
     --foreground: 210 40% 96%;
 
@@ -15,32 +16,58 @@
     --popover: 222 47% 9%;
     --popover-foreground: 210 40% 96%;
 
+    /* Primary - Cyan Blue (from logo) */
     --primary: 199 89% 48%;
+    --primary-light: 199 89% 58%;
+    --primary-dark: 199 89% 38%;
     --primary-foreground: 222 47% 6%;
 
-    --secondary: 222 30% 14%;
-    --secondary-foreground: 210 40% 96%;
+    /* Secondary - Purple/Magenta (from logo) */
+    --secondary: 280 80% 60%;
+    --secondary-light: 280 80% 70%;
+    --secondary-dark: 280 80% 50%;
+    --secondary-foreground: 0 0% 100%;
 
+    /* Accent Colors (from logo) */
+    --accent: 199 89% 48%;
+    --accent-orange: 25 95% 53%;
+    --accent-pink: 330 85% 60%;
+    --accent-blue: 210 100% 60%;
+    --accent-foreground: 222 47% 6%;
+
+    /* Neutral Colors */
     --muted: 222 30% 14%;
     --muted-foreground: 215 20% 55%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 6%;
-
+    /* Status Colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
 
+    /* UI Elements */
     --border: 222 30% 18%;
     --input: 222 30% 18%;
     --ring: 199 89% 48%;
-
     --radius: 0.75rem;
 
+    /* Gradients - Inspired by TechSutra Logo */
     --gradient-primary: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(210, 100%, 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(280, 80%, 60%), hsl(330, 85%, 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(25, 95%, 53%), hsl(330, 85%, 60%));
+    --gradient-logo: linear-gradient(135deg, hsl(25, 95%, 53%) 0%, hsl(330, 85%, 60%) 50%, hsl(210, 100%, 60%) 100%);
     --gradient-glow: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(280, 80%, 60%));
+    --gradient-hero: linear-gradient(180deg, hsl(222, 47%, 6%) 0%, hsl(222, 47%, 9%) 100%);
+
+    /* Shadows & Effects */
     --shadow-glow: 0 0 40px -10px hsl(199 89% 48% / 0.4);
+    --shadow-glow-strong: 0 0 60px -10px hsl(199 89% 48% / 0.6);
+    --shadow-glow-secondary: 0 0 40px -10px hsl(280 80% 60% / 0.4);
+    --shadow-glow-accent: 0 0 40px -10px hsl(25 95% 53% / 0.4);
     --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.4);
 
+    /* Sidebar */
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 96%;
     --sidebar-primary: 199 89% 48%;
@@ -48,6 +75,79 @@
     --sidebar-accent: 222 30% 14%;
     --sidebar-accent-foreground: 210 40% 96%;
     --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 199 89% 48%;
+  }
+
+  .light {
+    /* TechSutra Theme - Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Cyan Blue (adjusted for light mode) */
+    --primary: 199 89% 48%;
+    --primary-light: 199 89% 58%;
+    --primary-dark: 199 89% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Purple/Magenta (adjusted for light mode) */
+    --secondary: 280 80% 50%;
+    --secondary-light: 280 80% 60%;
+    --secondary-dark: 280 80% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent Colors */
+    --accent: 199 89% 48%;
+    --accent-orange: 25 95% 53%;
+    --accent-pink: 330 85% 60%;
+    --accent-blue: 210 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Neutral Colors */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+
+    /* UI Elements */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 199 89% 48%;
+    --radius: 0.75rem;
+
+    /* Gradients remain the same */
+    --gradient-primary: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(210, 100%, 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(280, 80%, 60%), hsl(330, 85%, 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(25, 95%, 53%), hsl(330, 85%, 60%));
+    --gradient-logo: linear-gradient(135deg, hsl(25, 95%, 53%) 0%, hsl(330, 85%, 60%) 50%, hsl(210, 100%, 60%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(280, 80%, 60%));
+    --gradient-hero: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 98%) 100%);
+
+    /* Shadows & Effects (lighter for light mode) */
+    --shadow-glow: 0 0 40px -10px hsl(199 89% 48% / 0.3);
+    --shadow-glow-strong: 0 0 60px -10px hsl(199 89% 48% / 0.5);
+    --shadow-glow-secondary: 0 0 40px -10px hsl(280 80% 60% / 0.3);
+    --shadow-glow-accent: 0 0 40px -10px hsl(25 95% 53% / 0.3);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.1);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
     --sidebar-ring: 199 89% 48%;
   }
 }
@@ -77,8 +177,35 @@
     background-image: var(--gradient-glow);
   }
 
+  .gradient-logo-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-logo);
+  }
+
+  .gradient-secondary-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-secondary);
+  }
+
+  .gradient-accent-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
   .glow-border {
     box-shadow: var(--shadow-glow);
+  }
+
+  .glow-border-strong {
+    box-shadow: var(--shadow-glow-strong);
+  }
+
+  .glow-border-secondary {
+    box-shadow: var(--shadow-glow-secondary);
+  }
+
+  .glow-border-accent {
+    box-shadow: var(--shadow-glow-accent);
   }
 
   .card-shadow {
@@ -87,6 +214,10 @@
 
   .glass {
     @apply bg-card/60 backdrop-blur-xl border border-border/50;
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-border;
   }
 }
 

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data/constants";
+import TechSutraLogo from "./TechSutraLogo";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   menuOpen: boolean;
@@ -13,9 +15,9 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         <a
           href="#home"
-          className="font-heading text-2xl font-bold gradient-text"
+          className="hover:scale-105 transition-transform duration-300"
         >
-          WebTechAvi<span className="text-primary">.</span>
+          <TechSutraLogo size="sm" showTagline={false} />
         </a>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
@@ -27,6 +29,7 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
           <a
             href="#contact"
             className="px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
@@ -53,6 +56,10 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
               {l.label}
             </a>
           ))}
+          <div className="flex items-center justify-between pt-2">
+            <span className="text-sm text-muted-foreground">Theme</span>
+            <ThemeToggle />
+          </div>
           <a
             href="#contact"
             onClick={() => setMenuOpen(false)}
