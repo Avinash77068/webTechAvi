@@ -1,6 +1,7 @@
 import { Sparkles, ArrowRight, Code2 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { stats } from "@/data/constants";
+import CalendlyDialog from "./CalendlyDialog";
 
 const Hero = () => {
   return (
@@ -22,12 +23,13 @@ const Hero = () => {
           We build modern, responsive, and high-performance websites that take your business to the next level.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up stagger-3">
-          <a href="#contact" className="group flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-all animate-pulse-glow">
-            Start Your Project
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+          <CalendlyDialog
+            triggerClassName="group flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-all animate-pulse-glow"
+            triggerLabel="Book a Free Call"
+          />
           <a href="#portfolio" className="flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-semibold text-lg hover:bg-secondary transition-colors">
             <Code2 size={20} />View Our Work
+            <ArrowRight size={18} className="opacity-70" />
           </a>
         </div>
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-up stagger-4">
