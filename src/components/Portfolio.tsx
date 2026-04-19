@@ -24,10 +24,10 @@ const Portfolio = () => {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-secondary text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors">
+                  <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-white text-sm text-foreground hover:bg-gray-100 text-black font-semibold transition-colors">
                     <Github size={14} />GitHub
                   </a>
-                  <a href={p.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-primary/10 text-sm text-primary hover:bg-primary/20 transition-colors">
+                  <a href={p.live} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-white text-sm text-primary hover:bg-gray-100 text-black font-semibold transition-colors">
                     <ExternalLink size={14} />Live Demo
                   </a>
                 </div>
