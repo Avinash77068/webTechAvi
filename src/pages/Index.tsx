@@ -8,12 +8,13 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import Team from "@/components/Team";
 import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
+
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSeo } from "@/hooks/use-seo";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { brandInfo as brand } from "@/data/constants";
+import { Contact } from "@/components/Contact";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);

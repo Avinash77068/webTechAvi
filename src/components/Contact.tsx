@@ -1,286 +1,226 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Send, Mail, Phone, MapPin, Loader2, MessageCircle, Calendar } from "lucide-react";
+import {
+  Briefcase,
+  Building2,
+  CheckCircle2,
+  Loader2,
+  MessageSquare,
+  Sparkles,
+} from "lucide-react";
 import { toast } from "sonner";
-import CalendlyDialog from "./CalendlyDialog";
-import { brandInfo, contactInfo } from "@/data/constants";
+import { User, Mail, MessageCircle, Phone, MapPin, Send } from "lucide-react";
 
-const schema = z.object({
-  name: z.string().min(2, "Please enter your name"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  budget: z.string().optional(),
-  projectType: z.string().optional(),
-  message: z.string().min(10, "Tell us a bit more about your project (min 10 characters)"),
-  honeypot: z.string().max(0, "Spam detected").optional(),
-});
-
-type FormValues = z.infer<typeof schema>;
-
-const iconMap = { Mail, Phone, MapPin };
-
-const Contact = () => {
+export function Contact() {
   const [submitting, setSubmitting] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      budget: "",
-      projectType: "",
-      message: "",
-      honeypot: "",
-    },
-  });
+  const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = async (values: FormValues) => {
-    if (values.honeypot) return;
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSubmitting(true);
-    try {
-      const endpoint = null as string | any;
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(values),
-        });
-        if (!res.ok) throw new Error(`Submit failed (${res.status})`);
-      } else {
-        const subject = encodeURIComponent(`New inquiry from ${values.name}`);
-        const body = encodeURIComponent(
-          [
-            `Name: ${values.name}`,
-            `Email: ${values.email}`,
-            values.phone ? `Phone: ${values.phone}` : null,
-            values.company ? `Company: ${values.company}` : null,
-            values.projectType ? `Project: ${values.projectType}` : null,
-            values.budget ? `Budget: ${values.budget}` : null,
-            "",
-            values.message,
-          ]
-            .filter(Boolean)
-            .join("\n"),
-        );
-        window.location.href = `mailto:info@techsutra.com?subject=${subject}&body=${body}`;
-      }
 
-      toast.success("Message sent!", {
-        description: "We'll get back to you within 24 hours.",
+    try {
+      const formData = new FormData(event.currentTarget);
+      formData.append("access_key", "20c1ccce-6777-4ffc-a717-5ef6d3b6a1b3");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
-      reset();
-    } catch (err) {
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        toast.success("Request submitted successfully!", {
+          description: "We'll get back to you within 24 hours.",
+        });
+        event.currentTarget.reset();
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch (error) {
       toast.error("Something went wrong", {
-        description: "Please try WhatsApp or email us directly.",
+        description: "Please try again or contact us directly.",
       });
     } finally {
       setSubmitting(false);
     }
   };
 
-  const whatsappHref = `https://wa.me/${brandInfo.whatsappNumber}?text=${encodeURIComponent(
-    "Hi TechSutra, I'd like to discuss a project.",
-  )}`;
+  if (submitted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center animate-fade-up">
+        <div className="relative mb-6">
+          <div className="absolute inset-0 bg-green-500/20 blur-2xl rounded-full animate-pulse" />
+          <CheckCircle2 className="w-20 h-20 text-green-500 relative animate-bounce" />
+        </div>
+        <h3 className="text-2xl font-heading font-bold mb-2 gradient-text">
+          Request Submitted!
+        </h3>
+        <p className="text-muted-foreground max-w-sm">
+          Thank you for reaching out. We'll review your request and get back to
+          you within 24 hours.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <section id="contact" className="py-24">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Get In Touch</span>
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mt-3">
-            Let's <span className="gradient-text">Work Together</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            Tell us about your project — we'll reply with a free quote within 24 hours.
-          </p>
+    <div className="max-w-2xl mx-auto">
+      <div>
+        <h2 className="text-3xl font-heading font-bold mb-6 gradient-text">
+          Get In Touch
+        </h2>
+      </div>
+      <form onSubmit={onSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2 group">
+            <label
+              htmlFor="name"
+              className="flex items-center gap-2 text-sm font-medium text-foreground"
+            >
+              <User className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+              Full Name *
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="John Doe"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30"
+            />
+          </div>
+
+          <div className="space-y-2 group">
+            <label
+              htmlFor="email"
+              className="flex items-center gap-2 text-sm font-medium text-foreground"
+            >
+              <Mail className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+              Email Address *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="john@company.com"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30"
+            />
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
-          <aside className="lg:col-span-2 space-y-4">
-            {contactInfo.map((item) => {
-              const Icon = iconMap[item.icon as keyof typeof iconMap];
-              const content = (
-                <>
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wide">{item.label}</div>
-                    <div className="font-medium text-sm mt-0.5">{item.value}</div>
-                  </div>
-                </>
-              );
-              return item.href ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-start gap-4 glass rounded-xl p-4 hover:border-primary/40 transition-colors"
-                >
-                  {content}
-                </a>
-              ) : (
-                <div key={item.label} className="flex items-start gap-4 glass rounded-xl p-4">
-                  {content}
-                </div>
-              );
-            })}
-
-            <div className="glass rounded-xl p-5 space-y-3">
-              <div className="text-xs text-muted-foreground uppercase tracking-wide">Prefer something faster?</div>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-green-500 text-white text-sm font-semibold hover:bg-green-600 transition-colors"
-              >
-                <MessageCircle size={16} /> WhatsApp Us
-              </a>
-              <CalendlyDialog
-                triggerClassName="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-semibold hover:bg-secondary transition-colors"
-                triggerLabel="Book a free call"
-              />
-              <div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
-                <Calendar size={12} className="inline mr-1" />
-                Avg. response in 3 hours (Mon–Sat, 10am–7pm IST)
-              </div>
-            </div>
-          </aside>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-3 glass rounded-2xl p-6 md:p-8 space-y-5" noValidate>
-            <input type="text" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden {...register("honeypot")} />
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label htmlFor="name" className="text-sm font-medium mb-1.5 block">
-                  Name <span className="text-destructive">*</span>
-                </label>
-                <input
-                  id="name"
-                  {...register("name")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="Your name"
-                />
-                {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
-              </div>
-              <div>
-                <label htmlFor="email" className="text-sm font-medium mb-1.5 block">
-                  Email <span className="text-destructive">*</span>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  {...register("email")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="you@example.com"
-                />
-                {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label htmlFor="phone" className="text-sm font-medium mb-1.5 block">Phone / WhatsApp</label>
-                <input
-                  id="phone"
-                  {...register("phone")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-              <div>
-                <label htmlFor="company" className="text-sm font-medium mb-1.5 block">Company</label>
-                <input
-                  id="company"
-                  {...register("company")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="Optional"
-                />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label htmlFor="projectType" className="text-sm font-medium mb-1.5 block">Project Type</label>
-                <select
-                  id="projectType"
-                  {...register("projectType")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                >
-                  <option value="">Select one</option>
-                  <option value="Landing Page">Landing page</option>
-                  <option value="Business Website">Business website</option>
-                  <option value="E-Commerce">E-commerce store</option>
-                  <option value="Web App / SaaS">Web app / SaaS</option>
-                  <option value="Redesign">Redesign / revamp</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="budget" className="text-sm font-medium mb-1.5 block">Budget</label>
-                <select
-                  id="budget"
-                  {...register("budget")}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                >
-                  <option value="">Select range</option>
-                  <option value="< ₹50k">Under ₹50k</option>
-                  <option value="₹50k–₹1L">₹50k – ₹1L</option>
-                  <option value="₹1L–₹3L">₹1L – ₹3L</option>
-                  <option value="₹3L–₹10L">₹3L – ₹10L</option>
-                  <option value="₹10L+">₹10L+</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="text-sm font-medium mb-1.5 block">
-                Tell us about your project <span className="text-destructive">*</span>
-              </label>
-              <textarea
-                id="message"
-                rows={5}
-                {...register("message")}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                placeholder="Goals, timeline, must-have features, inspiration links…"
-              />
-              {errors.message && <p className="text-xs text-destructive mt-1">{errors.message.message}</p>}
-            </div>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2 group">
+            <label
+              htmlFor="phone"
+              className="flex items-center gap-2 text-sm font-medium text-foreground"
             >
+              <Phone className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+91 98765 43210"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30"
+            />
+          </div>
+
+          <div className="space-y-2 group">
+            <label
+              htmlFor="company"
+              className="flex items-center gap-2 text-sm font-medium text-foreground"
+            >
+              <Building2 className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+              Company Name
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Your Company"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2 group">
+          <label
+            htmlFor="projectType"
+            className="flex items-center gap-2 text-sm font-medium text-foreground"
+          >
+            <Briefcase className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+            Project Type
+          </label>
+          <select
+            id="projectType"
+            name="projectType"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30 cursor-pointer"
+          >
+            <option value="">Select project type</option>
+            <option value="Website">Website Design & Development</option>
+            <option value="Web Application">Web Application</option>
+            <option value="E-Commerce">E-Commerce Store</option>
+            <option value="Mobile App">Mobile App Development</option>
+            <option value="SaaS Platform">SaaS Platform</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2 group">
+          <label
+            htmlFor="message"
+            className="flex items-center gap-2 text-sm font-medium text-foreground"
+          >
+            <MessageSquare className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+            Project Details *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={5}
+            placeholder="Tell us about your project goals, timeline, budget, and any specific requirements..."
+            className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all hover:border-primary/30 resize-none"
+          />
+        </div>
+
+        <div className="flex items-center gap-3 pt-2">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="flex-1 group relative overflow-hidden px-6 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed glow-border"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2">
               {submitting ? (
                 <>
-                  <Loader2 size={18} className="animate-spin" /> Sending…
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
                 </>
               ) : (
                 <>
-                  <Send size={18} /> Send Message
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Submit Request
+                  <Sparkles className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </>
               )}
-            </button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              By submitting, you agree to our{" "}
-              <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>.
-              We'll never share your info.
-            </p>
-          </form>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+          </button>
         </div>
-      </div>
-    </section>
-  );
-};
 
-export default Contact;
+        <p className="text-xs text-center text-muted-foreground">
+          By submitting, you agree to our{" "}
+          <a href="/privacy" className="text-primary hover:underline">
+            Privacy Policy
+          </a>
+          . We'll never share your information.
+        </p>
+      </form>
+    </div>
+  );
+}
