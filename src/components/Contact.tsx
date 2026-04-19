@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Send, Mail, Phone, MapPin, Loader2, MessageCircle, Calendar } from "lucide-react";
 import { toast } from "sonner";
-import { contactInfo, brand } from "@/data/constants";
 import CalendlyDialog from "./CalendlyDialog";
+import { brandInfo, contactInfo } from "@/data/constants";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -47,7 +47,7 @@ const Contact = () => {
     if (values.honeypot) return;
     setSubmitting(true);
     try {
-      const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
+      const endpoint = null as string | any;
       if (endpoint) {
         const res = await fetch(endpoint, {
           method: "POST",
@@ -71,7 +71,7 @@ const Contact = () => {
             .filter(Boolean)
             .join("\n"),
         );
-        window.location.href = `mailto:${brand.email}?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:info@techsutra.com?subject=${subject}&body=${body}`;
       }
 
       toast.success("Message sent!", {
@@ -87,7 +87,7 @@ const Contact = () => {
     }
   };
 
-  const whatsappHref = `https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent(
+  const whatsappHref = `https://wa.me/${brandInfo.whatsappNumber}?text=${encodeURIComponent(
     "Hi TechSutra, I'd like to discuss a project.",
   )}`;
 

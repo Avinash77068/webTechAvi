@@ -1,4 +1,28 @@
-export const brand = {
+
+export const navLinks = [
+  { label: "Home", href: "/#home", internal: true },
+  { label: "Services", href: "/#services", internal: true },
+  { label: "Work", href: "/#portfolio", internal: true },
+  { label: "Process", href: "/#process", internal: true },
+  { label: "Pricing", href: "/#pricing", internal: true },
+  { label: "FAQ", href: "/#faq", internal: true },
+  { label: "Contact", href: "/#contact", internal: true },
+];
+
+export const stats = [
+  { num: "100+", label: "Projects Delivered" },
+  { num: "50+", label: "Happy Clients" },
+  { num: "8+", label: "Years Experience" },
+  { num: "15+", label: "Team Members" },
+];
+
+export const contactInfo = [
+  { icon: "Mail", label: "Email", value: "info@techsutra.com", href: `mailto:info@techsutra.com` },
+  { icon: "Phone", label: "Phone", value: "+91 77068 97675", href: `tel:+917706897675` },
+  { icon: "MapPin", label: "Location", value: "Noida, Uttar Pradesh, India", href: null },
+];
+
+export const brandInfo = {
   name: "TechSutra",
   domain: "techsutra.com",
   siteUrl: "https://techsutra.com",
@@ -24,27 +48,4 @@ export const brand = {
   },
 } as const;
 
-export const navLinks = [
-  { label: "Home", href: "/#home", internal: true },
-  { label: "Services", href: "/#services", internal: true },
-  { label: "Work", href: "/#portfolio", internal: true },
-  { label: "Process", href: "/#process", internal: true },
-  { label: "Pricing", href: "/#pricing", internal: true },
-  { label: "FAQ", href: "/#faq", internal: true },
-  { label: "Contact", href: "/#contact", internal: true },
-];
-
-export const stats = [
-  { num: "100+", label: "Projects Delivered" },
-  { num: "50+", label: "Happy Clients" },
-  { num: "8+", label: "Years Experience" },
-  { num: "15+", label: "Team Members" },
-];
-
-export const contactInfo = [
-  { icon: "Mail", label: "Email", value: brand.email, href: `mailto:${brand.email}` },
-  { icon: "Phone", label: "Phone", value: brand.phoneDisplay, href: `tel:${brand.phonePrimary}` },
-  { icon: "MapPin", label: "Location", value: brand.location, href: null },
-];
-
-export const brandInfo = brand;
+export const brand = brandInfo;

@@ -1,8 +1,8 @@
 export const pricingTiers = [
   {
     name: "Starter",
-    priceINR: "₹25,000",
-    priceUSD: "$299",
+    priceINR: "₹25,00",
+    priceUSD: "$19",
     period: "one-time",
     tagline: "Perfect for small businesses and personal brands",
     features: [
@@ -19,8 +19,8 @@ export const pricingTiers = [
   },
   {
     name: "Growth",
-    priceINR: "₹75,000",
-    priceUSD: "$899",
+    priceINR: "₹75,00",
+    priceUSD: "$99",
     period: "one-time",
     tagline: "For businesses ready to scale online",
     features: [

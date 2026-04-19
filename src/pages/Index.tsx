@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSeo } from "@/hooks/use-seo";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
-import { brand } from "@/data/constants";
+import { brandInfo as brand } from "@/data/constants";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);

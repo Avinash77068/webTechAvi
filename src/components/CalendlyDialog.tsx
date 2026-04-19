@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { brand } from "@/data/constants";
+
 
 interface CalendlyDialogProps {
   triggerClassName?: string;
@@ -36,12 +36,7 @@ const CalendlyDialog = ({
             Tell us about your project and we'll send a written proposal within 24 hours.
           </DialogDescription>
         </DialogHeader>
-        <iframe
-          src={brand.calendlyUrl}
-          title="Schedule a call"
-          className="w-full flex-1 h-full border-0"
-          loading="lazy"
-        />
+       
       </DialogContent>
     </Dialog>
   );

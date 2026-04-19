@@ -1,11 +1,11 @@
 import { MessageCircle } from "lucide-react";
-import { brand } from "@/data/constants";
+import { brandInfo } from "@/data/constants";
 
 const WhatsAppButton = () => {
   const message = encodeURIComponent(
-    `Hi ${brand.name}! I'd like to discuss a project.`,
+    `Hi ${brandInfo.name}! I'd like to discuss a project.`,
   );
-  const href = `https://wa.me/${brand.whatsappNumber}?text=${message}`;
+  const href = `https://wa.me/${brandInfo.whatsappNumber}?text=${message}`;
 
   return (
     <a

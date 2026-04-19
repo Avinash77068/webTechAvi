@@ -1,6 +1,6 @@
 import PageShell from "@/components/PageShell";
 import { useSeo } from "@/hooks/use-seo";
-import { brand } from "@/data/constants";
+import { brandInfo as brand } from "@/data/constants";
 
 const Privacy = () => {
   useSeo({
