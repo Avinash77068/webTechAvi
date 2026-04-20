@@ -38,7 +38,7 @@ const Index = () => {
         <Pricing />
         <Team />
         <FAQ />
-        <Contact />
+        <Contact showThis={true} />
       </main>
       <Footer />
       <WhatsAppButton />

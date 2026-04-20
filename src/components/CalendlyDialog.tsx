@@ -47,7 +47,7 @@ const CalendlyDialog = ({
           </div>
         </DialogHeader>
         <div className="px-6 pb-6">
-          <Contact />
+          <Contact showThis={false} />
         </div>
       </DialogContent>
     </Dialog>
