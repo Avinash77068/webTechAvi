@@ -21,18 +21,59 @@ export function SEO({
   image = `${brandInfo.siteUrl}/og-image.png`,
   type = "website",
   noIndex = false,
-  keywords = [
-    "web development",
-    "web design",
-    "react development",
-    "nextjs development",
-    "UI/UX design",
-    "e-commerce development",
-    "SaaS development",
-    "mobile app development",
-    "TechSutra",
-    "web agency India",
-  ],
+  keywords =const advancedKeywords = [
+  // High Intent
+  "web development company in India",
+  "hire React developer India",
+  "hire Next.js developer India",
+  "SaaS product development company",
+  "custom web application development services",
+  "ecommerce website development company India",
+  "UI UX design agency India",
+  "full stack development services India",
+
+  // Long Tail (Low competition)
+  "cost of building SaaS product in India",
+  "how to hire React developer for startup",
+  "best tech stack for scalable web app",
+  "how to build MVP for startup India",
+  "affordable web development services for startups",
+  "Next.js vs React for SEO",
+  "custom ecommerce website vs Shopify",
+  "web app development timeline and cost",
+
+  // Problem Solving
+  "why website is slow and how to fix",
+  "how to improve website SEO performance",
+  "how to optimize Next.js app for SEO",
+  "best practices for frontend performance",
+  "reduce website bounce rate",
+
+  // Authority
+  "modern web development trends",
+  "future of SaaS development",
+  "AI in web development",
+  "headless CMS vs traditional CMS",
+  "micro frontend architecture",
+
+  // Local SEO
+  "web development company in Noida",
+  "software development agency in Delhi NCR",
+  "best React developers in Noida",
+  "SaaS development company in India",
+
+  // Technical SEO
+  "core web vitals optimization",
+  "technical SEO audit services",
+  "website speed optimization agency",
+  "lighthouse performance optimization",
+
+  // Branding
+  "TechSutra web development",
+  "TechSutra SaaS development",
+  "TechSutra React agency",
+  "TechSutra portfolio"
+],
   author = brandInfo.name,
   publishedTime,
   modifiedTime,
