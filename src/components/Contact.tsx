@@ -54,19 +54,6 @@ export function Contact({ showThis }: { showThis: boolean }) {
   return (
     <section id="contact" className={`${showThis ? "py-24" : ""}`}>
       <div>
-        <div className={`text-center mb-16 ${showThis ? "block" : "hidden"}`}>
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">
-            Get In Touch
-          </span>
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mt-3">
-            Let's <span className="gradient-text">Work Together</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            Tell us about your project — we'll reply with a free quote within 24
-            hours.
-          </p>
-        </div>
-
         <div
           className={`max-w-6xl mx-auto ${showThis ? "grid lg:grid-cols-3 gap-8" : "max-w-2xl mx-auto"}`}
         >
