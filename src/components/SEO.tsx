@@ -21,7 +21,7 @@ export function SEO({
   image = `${brandInfo.siteUrl}/og-image.png`,
   type = "website",
   noIndex = false,
-  keywords =const advancedKeywords = [
+  keywords = [
   // High Intent
   "web development company in India",
   "hire React developer India",
