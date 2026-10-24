@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb, type PDFFont } from "pdf-lib";
+import type { PDFFont } from "pdf-lib";
 import type { DocumentBlock, TextRun } from "@/lib/docx/document-blocks";
 import { hasUnsupportedCharacters, toLatin1 } from "@/lib/pdf/text-encoding";
 
@@ -23,6 +23,7 @@ function toWords(runs: TextRun[]): Word[] {
 
 /** Renders structured text to a PDF. Fonts, headings, lists and alignment are kept; images and tables are not. */
 export async function blocksToPdf(blocks: DocumentBlock[]): Promise<{ bytes: Uint8Array; hadUnsupportedText: boolean }> {
+  const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib");
   const pdf = await PDFDocument.create();
   const fonts = {
     regular: await pdf.embedFont(StandardFonts.Helvetica),

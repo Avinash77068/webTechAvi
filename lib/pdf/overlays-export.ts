@@ -1,4 +1,3 @@
-import { StandardFonts, degrees, rgb } from "pdf-lib";
 import type { Overlay } from "@/lib/pdf/overlay-types";
 import { loadPdfLibDoc } from "@/lib/pdf/pdf-lib-utils";
 import { hasUnsupportedCharacters, toLatin1 } from "@/lib/pdf/text-encoding";
@@ -6,13 +5,6 @@ import { hasUnsupportedCharacters, toLatin1 } from "@/lib/pdf/text-encoding";
 /** Distance from the top of a text box to its first baseline, as a multiple of the font size. */
 export const TEXT_BASELINE_RATIO = 0.86;
 export const TEXT_LINE_HEIGHT_RATIO = 1.2;
-
-function hexToRgb(hex: string) {
-  const value = hex.replace("#", "");
-  const full = value.length === 3 ? value.replace(/./g, (c) => c + c) : value;
-  const n = Number.parseInt(full, 16);
-  return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
-}
 
 /**
  * Converts a point measured from the top-left of the page as displayed (rotation applied)
@@ -36,6 +28,13 @@ export async function exportOverlaysToPdf(
   file: File,
   overlays: Overlay[],
 ): Promise<{ bytes: Uint8Array; hadUnsupportedText: boolean }> {
+  const { StandardFonts, degrees, rgb } = await import("pdf-lib");
+  const hexToRgb = (hex: string) => {
+    const value = hex.replace("#", "");
+    const full = value.length === 3 ? value.replace(/./g, (c) => c + c) : value;
+    const n = Number.parseInt(full, 16);
+    return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
+  };
   const doc = await loadPdfLibDoc(file);
   const fonts = {
     regular: await doc.embedFont(StandardFonts.Helvetica),

@@ -1,6 +1,7 @@
-import { PDFDocument, degrees } from "pdf-lib";
+import type { PDFDocument } from "pdf-lib";
 
 export async function loadPdfLibDoc(file: File | Blob | ArrayBuffer): Promise<PDFDocument> {
+  const { PDFDocument } = await import("pdf-lib");
   const bytes = file instanceof ArrayBuffer ? file : await file.arrayBuffer();
   try {
     return await PDFDocument.load(bytes);
@@ -16,6 +17,7 @@ export async function mergePdfFiles(files: File[]): Promise<Uint8Array> {
   if (files.length < 2) {
     throw new Error("Add at least two PDF files to merge.");
   }
+  const { PDFDocument } = await import("pdf-lib");
   const merged = await PDFDocument.create();
   for (const file of files) {
     const source = await loadPdfLibDoc(file);
@@ -27,6 +29,7 @@ export async function mergePdfFiles(files: File[]): Promise<Uint8Array> {
 
 /** Extracts the given 1-based page numbers (in that order) into a new PDF. */
 export async function extractPdfPages(file: File, pageNumbers: number[]): Promise<Uint8Array> {
+  const { PDFDocument } = await import("pdf-lib");
   const source = await loadPdfLibDoc(file);
   const result = await PDFDocument.create();
   const indices = pageNumbers.map((n) => n - 1);
@@ -47,6 +50,7 @@ export async function organizePdfPages(file: File, operations: PageOperation[]):
   if (operations.length === 0) {
     throw new Error("Keep at least one page.");
   }
+  const { PDFDocument, degrees } = await import("pdf-lib");
   const source = await loadPdfLibDoc(file);
   const result = await PDFDocument.create();
   const pages = await result.copyPages(

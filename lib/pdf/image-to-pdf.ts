@@ -1,4 +1,3 @@
-import { PDFDocument, PageSizes } from "pdf-lib";
 import { sniffImageType } from "@/lib/validation";
 import { canvasToBlob, drawBitmapToCanvas, loadImageBitmap } from "@/lib/image/canvas-utils";
 
@@ -49,9 +48,10 @@ export async function normalizeImageForPdf(file: File): Promise<NormalizedImageI
 
 function getFixedPageDimensions(
   pageSize: Exclude<PdfPageSize, "fit">,
-  orientation: PdfOrientation
+  orientation: PdfOrientation,
+  pageSizes: typeof import("pdf-lib").PageSizes
 ): [number, number] {
-  const base = pageSize === "a4" ? PageSizes.A4 : PageSizes.Letter;
+  const base = pageSize === "a4" ? pageSizes.A4 : pageSizes.Letter;
   const [w, h] = base;
   return orientation === "landscape" ? [h, w] : [w, h];
 }
@@ -65,6 +65,7 @@ export async function buildPdfFromImages(
     throw new Error("Add at least one image before generating a PDF.");
   }
 
+  const { PDFDocument, PageSizes } = await import("pdf-lib");
   const pdfDoc = await PDFDocument.create();
   const margin = options.marginPt ?? PAGE_MARGIN_DEFAULT;
 
@@ -82,7 +83,7 @@ export async function buildPdfFromImages(
       pageWidth = image.width;
       pageHeight = image.height;
     } else {
-      [pageWidth, pageHeight] = getFixedPageDimensions(options.pageSize, options.orientation);
+      [pageWidth, pageHeight] = getFixedPageDimensions(options.pageSize, options.orientation, PageSizes);
     }
 
     const page = pdfDoc.addPage([pageWidth, pageHeight]);

@@ -48,6 +48,11 @@ export interface ToolDefinition {
   popular?: boolean;
 }
 
+export type ToolSearchEntry = Pick<
+  ToolDefinition,
+  "slug" | "name" | "shortDescription" | "status" | "keywords"
+>;
+
 export const categoryMeta: Record<
   ToolCategory,
   { label: string; description: string }
@@ -710,6 +715,16 @@ export function getToolsByCategory(category: ToolCategory): ToolDefinition[] {
 
 export function getPopularTools(): ToolDefinition[] {
   return tools.filter((tool) => tool.popular);
+}
+
+export function getToolSearchIndex(): ToolSearchEntry[] {
+  return tools.map(({ slug, name, shortDescription, status, keywords }) => ({
+    slug,
+    name,
+    shortDescription,
+    status,
+    keywords,
+  }));
 }
 
 export function getRelatedTools(tool: ToolDefinition): ToolDefinition[] {

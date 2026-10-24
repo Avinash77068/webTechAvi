@@ -11,7 +11,9 @@ import {
   Zap,
 } from "lucide-react";
 import { SearchBar } from "@/components/layout/search-bar";
-import { categoryMeta, getAvailableTools } from "@/lib/tools-registry";
+import { categoryMeta, getAvailableTools, getToolSearchIndex } from "@/lib/tools-registry";
+
+const toolSearchIndex = getToolSearchIndex();
 
 const toolkitCards = [
   {
@@ -71,7 +73,7 @@ export function Hero() {
           </p>
 
           <div className="mx-auto mt-7 max-w-[39rem] lg:mx-0">
-            <SearchBar variant="hero" autoFocus={false} />
+            <SearchBar tools={toolSearchIndex} variant="hero" autoFocus={false} />
           </div>
 
           <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">

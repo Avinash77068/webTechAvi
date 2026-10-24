@@ -226,7 +226,7 @@
 
 .hero-title-accent {
   color: #126fd0;
-  /* background: linear-gradient(95deg, #1179c8 0%, #145bd0 55%, #286fde 100%); */
+  background: linear-gradient(95deg, #1179c8 0%, #145bd0 55%, #286fde 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

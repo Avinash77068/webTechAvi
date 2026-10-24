@@ -3,12 +3,10 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { tools, type ToolDefinition } from "@/lib/tools-registry";
+import type { ToolSearchEntry } from "@/lib/tools-registry";
 
-function searchTools(query: string): ToolDefinition[] {
+function searchTools(query: string, tools: ToolSearchEntry[]): ToolSearchEntry[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   return tools
@@ -23,17 +21,21 @@ function searchTools(query: string): ToolDefinition[] {
 }
 
 interface SearchBarProps {
+  tools: ToolSearchEntry[];
   variant?: "hero" | "compact";
   placeholder?: string;
   className?: string;
   autoFocus?: boolean;
+  onNavigate?: () => void;
 }
 
 export function SearchBar({
+  tools,
   variant = "compact",
   placeholder = "What do you want to do today?",
   className,
   autoFocus,
+  onNavigate,
 }: SearchBarProps) {
   const router = useRouter();
   const listboxId = useId();
@@ -42,7 +44,7 @@ export function SearchBar({
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const results = useMemo(() => searchTools(query), [query]);
+  const results = useMemo(() => searchTools(query, tools), [query, tools]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -54,16 +56,18 @@ export function SearchBar({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  function goToTool(tool: ToolDefinition) {
+  function goToTool(tool: ToolSearchEntry) {
     if (tool.status !== "available") return;
     setOpen(false);
     setQuery("");
+    onNavigate?.();
     router.push(`/tools/${tool.slug}`);
   }
 
   function submitSearch() {
     const search = query.trim() ? `?q=${encodeURIComponent(query.trim())}` : "";
     setOpen(false);
+    onNavigate?.();
     router.push(`/tools${search}`);
   }
 
@@ -99,7 +103,7 @@ export function SearchBar({
           className="pointer-events-none absolute top-1/2 left-4 size-4.5 -translate-y-1/2 text-primary"
           aria-hidden="true"
         />
-        <Input
+        <input
           role="combobox"
           aria-expanded={open && results.length > 0}
           aria-controls={listboxId}
@@ -116,7 +120,7 @@ export function SearchBar({
           placeholder={placeholder}
           aria-label="Search tools"
           className={cn(
-            "h-10 w-full rounded-full border-border/90 bg-card/75 pl-11 text-sm text-foreground placeholder:text-muted-foreground/85 focus-visible:border-primary/75 focus-visible:ring-primary/25",
+            "h-10 w-full rounded-full border border-border/90 bg-card/75 px-3 pl-11 text-sm text-foreground outline-none placeholder:text-muted-foreground/85 focus-visible:border-primary/75 focus-visible:ring-2 focus-visible:ring-primary/25",
             variant === "hero" && "h-[3.55rem] rounded-[1rem] border-primary/35 bg-card/95 pl-12 pr-16 text-base shadow-[0_12px_38px_rgba(0,0,0,0.12)] placeholder:text-muted-foreground focus-visible:border-primary/70 focus-visible:ring-primary/25"
           )}
         />
@@ -144,7 +148,6 @@ export function SearchBar({
             </li>
           ) : (
             results.map((tool, index) => {
-              const Icon = tool.icon;
               const isComingSoon = tool.status !== "available";
               return (
                 <li key={tool.slug} role="option" aria-selected={index === activeIndex}>
@@ -159,12 +162,12 @@ export function SearchBar({
                       isComingSoon && "cursor-not-allowed opacity-60"
                     )}
                   >
-                    <Icon className="size-4 shrink-0 text-primary" aria-hidden="true" />
+                    <Search className="size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span className="flex-1 truncate">{tool.name}</span>
                     {isComingSoon && (
-                      <Badge variant="secondary" className="shrink-0 text-[0.65rem]">
+                      <span className="shrink-0 rounded-md bg-secondary px-2 py-0.5 text-[0.65rem] text-secondary-foreground">
                         Coming soon
-                      </Badge>
+                      </span>
                     )}
                   </button>
                 </li>
