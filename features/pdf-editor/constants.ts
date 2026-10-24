@@ -28,3 +28,6 @@ export const RECT_DEFAULTS: Record<RectOverlay["label"], Pick<RectOverlay, "colo
 export const IMAGE_ACCEPT = "image/png,image/jpeg";
 export const IMAGE_MIME_TYPES = ["image/png", "image/jpeg"];
 export const IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg"];
+
+/** Extra space around existing text that is covered when it is replaced, in PDF points. */
+export const EXISTING_TEXT_COVER_PADDING = 1.5;

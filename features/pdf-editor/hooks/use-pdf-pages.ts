@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { sniffIsPdf } from "@/lib/validation";
-import { loadPdfDocument, renderPdfPageToCanvas, type PdfDocumentHandle } from "@/lib/pdf/pdfjs-client";
+import {
+  getPdfPageTextRuns,
+  loadPdfDocument,
+  renderPdfPageToCanvas,
+  type PdfDocumentHandle,
+  type PdfTextRun,
+} from "@/lib/pdf/pdfjs-client";
 import { PREVIEW_RENDER_WIDTH } from "../constants";
 import type { PageSize } from "../types";
 
@@ -13,6 +19,7 @@ export function usePdfPages() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageImageUrl, setPageImageUrl] = useState<string | null>(null);
   const [pageSize, setPageSize] = useState<PageSize | null>(null);
+  const [textRuns, setTextRuns] = useState<PdfTextRun[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -32,12 +39,15 @@ export function usePdfPages() {
         const unscaled = page.getViewport({ scale: 1 });
         const canvas = await renderPdfPageToCanvas(doc, currentPage, PREVIEW_RENDER_WIDTH / unscaled.width);
         if (cancelled) return;
+        const runs = await getPdfPageTextRuns(doc, currentPage).catch(() => []);
+        if (cancelled) return;
         canvas.toBlob(
           (blob) => {
             if (!blob || cancelled) return;
             createdUrl = URL.createObjectURL(blob);
             setPageImageUrl(createdUrl);
             setPageSize({ width: unscaled.width, height: unscaled.height });
+            setTextRuns(runs);
           },
           "image/jpeg",
           0.92,
@@ -77,6 +87,7 @@ export function usePdfPages() {
     setDoc(null);
     setPageImageUrl(null);
     setPageSize(null);
+    setTextRuns([]);
     setErrors([]);
   }
 
@@ -89,6 +100,7 @@ export function usePdfPages() {
     goToPage: (page: number) => setCurrentPage(Math.min(Math.max(1, page), Math.max(1, pageCount))),
     pageImageUrl,
     pageSize,
+    textRuns,
     isLoading,
     errors,
     setErrors,

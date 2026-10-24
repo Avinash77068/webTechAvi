@@ -26,6 +26,13 @@ export function useOverlays() {
     setSelectedId(overlay.id);
   }, []);
 
+  /** Adds several overlays as one undo step and selects the last one. */
+  const addMany = useCallback((added: Overlay[]) => {
+    if (added.length === 0) return;
+    setState((s) => ({ items: [...s.items, ...added], past: pushPast(s.past, s.items), future: [] }));
+    setSelectedId(added[added.length - 1].id);
+  }, []);
+
   const remove = useCallback((id: string) => {
     setState((s) => ({ items: s.items.filter((o) => o.id !== id), past: pushPast(s.past, s.items), future: [] }));
     setSelectedId((current) => (current === id ? null : current));
@@ -72,6 +79,7 @@ export function useOverlays() {
     canRedo: state.future.length > 0,
     select: setSelectedId,
     add,
+    addMany,
     remove,
     beginChange,
     update,

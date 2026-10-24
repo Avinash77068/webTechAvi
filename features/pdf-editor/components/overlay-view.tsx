@@ -25,11 +25,14 @@ interface OverlayViewProps {
   onSelect: () => void;
   onBeginChange: () => void;
   onChange: (updater: (overlay: Overlay) => Overlay) => void;
+  /** Opens the text for editing as soon as the overlay appears. */
+  startEditing?: boolean;
+  onEditEnd?: () => void;
 }
 
-export function OverlayView({ overlay, page, scale, selected, getPageRect, onSelect, onBeginChange, onChange }: OverlayViewProps) {
+export function OverlayView({ overlay, page, scale, selected, getPageRect, onSelect, onBeginChange, onChange, startEditing = false, onEditEnd }: OverlayViewProps) {
   const drag = useRef<DragState | null>(null);
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(startEditing);
 
   function start(event: React.PointerEvent, mode: DragState["mode"]) {
     event.stopPropagation();
@@ -59,6 +62,11 @@ export function OverlayView({ overlay, page, scale, selected, getPageRect, onSel
       const heightFrac = clamp(origin.heightFrac + dy, MIN_OVERLAY_FRAC / 2, 1 - origin.y);
       onChange((current) => (current.type === "rect" ? { ...current, widthFrac, heightFrac } : current));
     }
+  }
+
+  function stopEditing() {
+    setEditing(false);
+    onEditEnd?.();
   }
 
   function end() {
@@ -91,10 +99,10 @@ export function OverlayView({ overlay, page, scale, selected, getPageRect, onSel
         aria-label="Edit text"
         onFocus={(event) => event.currentTarget.select()}
         onChange={(event) => onChange((o) => (o.type === "text" ? { ...o, text: event.target.value } : o))}
-        onBlur={() => setEditing(false)}
+        onBlur={stopEditing}
         onKeyDown={(event) => {
           event.stopPropagation();
-          if (event.key === "Escape" || (event.key === "Enter" && (event.metaKey || event.ctrlKey))) setEditing(false);
+          if (event.key === "Escape" || (event.key === "Enter" && (event.metaKey || event.ctrlKey))) stopEditing();
         }}
         onPointerDown={(event) => event.stopPropagation()}
         style={{ ...textStyle, fieldSizing: "content", minWidth: "2ch", resize: "none", overflow: "hidden", margin: 0, padding: 0, border: 0, background: "transparent", outline: "none" }}

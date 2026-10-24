@@ -10,12 +10,13 @@ import {
   DEFAULT_IMAGE_WIDTH_FRAC,
   DEFAULT_TEXT,
   DEFAULT_ZOOM_INDEX,
+  EXISTING_TEXT_COVER_PADDING,
   RECT_DEFAULTS,
   TEXT_COLORS,
   ZOOM_LEVELS,
 } from "../constants";
 import type { EditorTool } from "../types";
-import { clampPosition } from "../utils";
+import { clampPosition, findTextRunAt, textRunBounds } from "../utils";
 import { useOverlays } from "./use-overlays";
 import { usePdfPages } from "./use-pdf-pages";
 
@@ -45,6 +46,7 @@ export function usePdfEditor() {
   const [imageAsset, setImageAsset] = useState<ImageAsset | null>(null);
   const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
   const [pendingPlacement, setPendingPlacement] = useState<{ x: number; y: number } | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [exportErrors, setExportErrors] = useState<string[]>([]);
   const [warnings, setWarnings] = useState<string[]>([]);
@@ -52,7 +54,7 @@ export function usePdfEditor() {
   const assetUrls = useRef<Set<string>>(new Set());
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  const { overlays, add, clear, select } = overlayState;
+  const { overlays, add, addMany, clear, select } = overlayState;
   const { currentPage, pageSize } = pages;
 
   useEffect(() => {
@@ -94,10 +96,46 @@ export function usePdfEditor() {
     setTool("select");
   }
 
+  /** Replaces a piece of existing PDF text: covers the original and opens an editable copy on top. */
+  function editExistingText(x: number, y: number): boolean {
+    if (!pageSize) return false;
+    const run = findTextRunAt(pages.textRuns, x * pageSize.width, y * pageSize.height);
+    if (!run) return false;
+    const box = textRunBounds(run);
+    const pad = EXISTING_TEXT_COVER_PADDING;
+    const pageIndex = currentPage - 1;
+    const cover: RectOverlay = {
+      id: crypto.randomUUID(),
+      type: "rect",
+      label: "Cover",
+      pageIndex,
+      x: (box.left - pad) / pageSize.width,
+      y: (box.top - pad) / pageSize.height,
+      widthFrac: (box.width + pad * 2) / pageSize.width,
+      heightFrac: (box.height + pad * 2) / pageSize.height,
+      color: "#ffffff",
+      opacity: 1,
+    };
+    const text: TextOverlay = {
+      id: crypto.randomUUID(),
+      type: "text",
+      pageIndex,
+      x: box.left / pageSize.width,
+      y: box.top / pageSize.height,
+      text: run.text,
+      fontSize: Math.round(run.fontSize * 10) / 10,
+      color: TEXT_COLORS[0],
+      bold: false,
+    };
+    addMany([cover, text]);
+    setEditingId(text.id);
+    return true;
+  }
+
   /** Handles a click on the page with the active tool. */
   function handlePageClick(x: number, y: number) {
     if (tool === "select") {
-      select(null);
+      if (!editExistingText(x, y)) select(null);
     } else if (tool === "signature") {
       if (signature) placeAt(x, y, signature);
       else {
@@ -199,6 +237,8 @@ export function usePdfEditor() {
     zoomIn: () => setZoomIndex((i) => Math.min(i + 1, ZOOM_LEVELS.length - 1)),
     zoomOut: () => setZoomIndex((i) => Math.max(i - 1, 0)),
     handlePageClick,
+    editingId,
+    endEditing: () => setEditingId(null),
     signatureDialogOpen,
     saveSignature,
     cancelSignature,

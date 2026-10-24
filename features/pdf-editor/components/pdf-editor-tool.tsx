@@ -123,6 +123,9 @@ export function PdfEditorTool() {
         zoom={editor.zoom}
         tool={editor.tool}
         overlays={overlays.filter((o) => o.pageIndex === pages.currentPage - 1)}
+        textRuns={pages.textRuns}
+        editingId={editor.editingId}
+        onEditEnd={editor.endEditing}
         selectedId={selectedId}
         onPageClick={editor.handlePageClick}
         onSelect={overlayState.select}

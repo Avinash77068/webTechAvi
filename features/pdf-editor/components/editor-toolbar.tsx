@@ -28,7 +28,7 @@ const TOOLS: { tool: EditorTool; label: string; icon: LucideIcon }[] = [
 ];
 
 const HINTS: Record<EditorTool, string> = {
-  select: "Click an item to select it. Drag to move, drag the corner handle to resize, double-click text to edit it.",
+  select: "Click existing text in the PDF to edit it. Click an added item to select it, drag to move it, or drag the corner handle to resize.",
   text: "Click on the page to place a text box.",
   signature: "Click on the page to place your signature.",
   image: "Click on the page to place an image.",
