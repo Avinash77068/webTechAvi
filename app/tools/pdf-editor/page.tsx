@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function PdfEditorPage() {
   return (
     <ToolPageLayout
+      hero
       tool={tool}
       instructions={
         <section aria-labelledby="how-to-heading">

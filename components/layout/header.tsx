@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Sparkles } from "lucide-react";
+import { ChevronDown, Menu, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,14 +11,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { SearchBar } from "@/components/layout/search-bar";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { siteConfig } from "@/lib/site-config";
-import { categoryMeta } from "@/lib/tools-registry";
+import { categoryMeta, getToolsByCategory, type ToolCategory } from "@/lib/tools-registry";
 
 const categoryLinks = Object.entries(categoryMeta).map(([slug, meta]) => ({
   slug,
   label: meta.label,
+  tools: getToolsByCategory(slug as ToolCategory).filter((t) => t.status === "available"),
 }));
 
 export function Header() {
@@ -36,18 +43,25 @@ export function Header() {
 
         <nav aria-label="Tool categories" className="hidden items-center gap-1 lg:flex">
           {categoryLinks.map((category) => (
-            <Button
-              key={category.slug}
-              variant="ghost"
-              size="sm"
-              nativeButton={false}
-              render={<Link href={`/tools?category=${category.slug}`} />}
-            >
-              {category.label}
-            </Button>
+            <DropdownMenu key={category.slug}>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="sm" className="gap-1" />}
+              >
+                {category.label}
+                <ChevronDown className="size-3.5" aria-hidden="true" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-60">
+                {category.tools.map((tool) => (
+                  <DropdownMenuItem key={tool.slug} render={<Link href={`/tools/${tool.slug}`} />}>
+                    <tool.icon className="size-4" aria-hidden="true" />
+                    {tool.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           ))}
-          <Button variant="ghost" size="sm" nativeButton={false} render={<Link href="/blog" />}>
-            Blog
+          <Button variant="ghost" size="sm" nativeButton={false} render={<Link href="/tools" />}>
+            All Tools
           </Button>
         </nav>
 
@@ -74,14 +88,22 @@ export function Header() {
                 </div>
                 <nav aria-label="Tool categories" className="flex flex-col gap-1">
                   {categoryLinks.map((category) => (
-                    <Link
-                      key={category.slug}
-                      href={`/tools?category=${category.slug}`}
-                      onClick={() => setMobileOpen(false)}
-                      className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
-                    >
-                      {category.label}
-                    </Link>
+                    <div key={category.slug} className="mb-2">
+                      <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {category.label}
+                      </p>
+                      {category.tools.map((tool) => (
+                        <Link
+                          key={tool.slug}
+                          href={`/tools/${tool.slug}`}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+                        >
+                          <tool.icon className="size-4" aria-hidden="true" />
+                          {tool.name}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                   <Link
                     href="/tools"
@@ -89,13 +111,6 @@ export function Header() {
                     className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                   >
                     All Tools
-                  </Link>
-                  <Link
-                    href="/blog"
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
-                  >
-                    Blog
                   </Link>
                 </nav>
               </div>
