@@ -5,7 +5,7 @@ import { getAvailableTools } from "@/lib/tools-registry";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/tools", "/about", "/contact", "/privacy", "/terms", "/blog"].map(
+  const staticRoutes = ["", "/tools", "/about", "/contact", "/privacy", "/terms"].map(
     (path) => ({
       url: `${siteConfig.url}${path}`,
       lastModified: new Date(),

@@ -19,6 +19,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored ffmpeg wrapper, copied unchanged from node_modules.
+    "public/ffmpeg/**",
   ]),
 ]);
 

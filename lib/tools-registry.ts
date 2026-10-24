@@ -449,12 +449,27 @@ export const tools: ToolDefinition[] = [
     description: "A rich-text editor with headings, bold, italic, lists and alignment. Export a real DOCX file.",
     category: "document",
     icon: FileText,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["DOCX"],
     maxFileSizeMB: 20,
     keywords: ["docx editor", "word editor online"],
-    privacyNote: "Editing will run locally. Complex formatting, tables and headers may not round-trip perfectly.",
-    faqs: [],
+    privacyNote: "Editing runs locally. Complex formatting, tables and headers may not round-trip perfectly.",
+    faqs: [
+      {
+        question: "Can I edit an existing Word document?",
+        answer:
+          "Yes. Upload a DOCX and its text, headings, lists, bold, italic and underline are loaded into the editor. Images, tables, headers and footers are not carried over.",
+      },
+      {
+        question: "Is my document uploaded?",
+        answer: "No. Opening, editing and exporting all happen in your browser, so the document never leaves your device.",
+      },
+      {
+        question: "Will the exported file look exactly like my original?",
+        answer:
+          "Not always. The editor supports basic formatting only, so complex Word layouts may look different after export.",
+      },
+    ],
     relatedSlugs: ["word-to-pdf", "txt-editor"],
   },
   {
@@ -464,12 +479,27 @@ export const tools: ToolDefinition[] = [
     description: "Convert supported DOCX content into a PDF while preserving common formatting where feasible.",
     category: "document",
     icon: FileType,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["DOCX"],
     maxFileSizeMB: 20,
     keywords: ["word to pdf", "docx to pdf"],
-    privacyNote: "Conversion will run locally. Complex Word layouts may not be fully preserved.",
-    faqs: [],
+    privacyNote: "Conversion runs locally. Complex Word layouts may not be fully preserved.",
+    faqs: [
+      {
+        question: "Is the formatting preserved?",
+        answer:
+          "Headings, paragraphs, lists, bold, italic, underline and alignment are kept. Images, tables, headers, footers and custom fonts are not.",
+      },
+      {
+        question: "Why do some characters show as question marks?",
+        answer:
+          "The PDF is built with standard fonts that only cover Latin characters. Text in other scripts, such as Hindi, can't be shown and is replaced with a question mark.",
+      },
+      {
+        question: "Is my document uploaded?",
+        answer: "No. The conversion runs entirely in your browser.",
+      },
+    ],
     relatedSlugs: ["docx-editor", "merge-pdf"],
   },
   {
@@ -479,12 +509,25 @@ export const tools: ToolDefinition[] = [
     description: "Open or paste plain text, edit, search, clear, copy and download. Full Unicode and Hindi support.",
     category: "document",
     icon: Type,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["TXT"],
     maxFileSizeMB: 10,
     keywords: ["text editor online", "txt editor"],
     privacyNote: "Everything happens locally in your browser.",
-    faqs: [],
+    faqs: [
+      {
+        question: "Does it support Hindi and other languages?",
+        answer: "Yes. Files are read and saved as UTF-8, so Hindi and other Unicode text are preserved.",
+      },
+      {
+        question: "Does it save my text automatically?",
+        answer: "No. Nothing is stored or uploaded, so download your file before closing the page.",
+      },
+      {
+        question: "How does Replace all work?",
+        answer: "It replaces every exact, case-sensitive match of the text in the Find box.",
+      },
+    ],
     relatedSlugs: ["image-to-text", "csv-editor"],
   },
   {
@@ -494,12 +537,25 @@ export const tools: ToolDefinition[] = [
     description: "Upload a CSV, edit it in a table, add or remove rows and columns, and export a correctly escaped CSV.",
     category: "document",
     icon: Table,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["CSV"],
     maxFileSizeMB: 20,
     keywords: ["csv editor", "csv viewer online"],
     privacyNote: "Parsing and editing run locally in your browser.",
-    faqs: [],
+    faqs: [
+      {
+        question: "Which delimiters are supported?",
+        answer: "Comma, semicolon and tab. The delimiter is detected automatically when you open a file and you can change it before downloading.",
+      },
+      {
+        question: "Are quotes and commas inside cells handled?",
+        answer: "Yes. Cells containing the delimiter, quotes or line breaks are escaped correctly when you download the CSV.",
+      },
+      {
+        question: "Is there a size limit?",
+        answer: "The editor supports files up to 5,000 rows so the table stays responsive.",
+      },
+    ],
     relatedSlugs: ["txt-editor"],
   },
 

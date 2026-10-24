@@ -11,13 +11,11 @@ export const siteConfig = {
     { label: "PDF Tools", href: "/tools?category=pdf" },
     { label: "Document Tools", href: "/tools?category=document" },
     { label: "Video & Audio", href: "/tools?category=video-audio" },
-    { label: "Blog", href: "/blog" },
   ],
   footerLinks: {
     product: [
       { label: "All Tools", href: "/tools" },
-      { label: "Blog", href: "/blog" },
-    ],
+      ],
     company: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
