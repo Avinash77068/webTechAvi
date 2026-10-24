@@ -19,12 +19,12 @@ export default function PdfEditorPage() {
       instructions={
         <section aria-labelledby="how-to-heading">
           <h2 id="how-to-heading" className="text-xl font-semibold">
-            How to add text or a signature to a PDF
+            How to edit and sign a PDF
           </h2>
           <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-muted-foreground">
-            <li>Upload a PDF and navigate to the page you want to edit.</li>
-            <li>Choose "Add text" or "Signature," then click on the page to place it.</li>
-            <li>Remove or undo any overlay before exporting.</li>
+            <li>Upload a PDF and go to the page you want to edit.</li>
+            <li>Pick Text, Signature, Image, Highlight or Cover, then click on the page to place it.</li>
+            <li>Select an item to drag it, resize it, or change its text, size and color.</li>
             <li>Click "Export PDF" and download the result.</li>
           </ol>
         </section>

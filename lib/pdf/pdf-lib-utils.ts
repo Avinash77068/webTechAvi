@@ -1,6 +1,6 @@
-import { PDFDocument, degrees, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, degrees } from "pdf-lib";
 
-async function loadPdfLibDoc(file: File | Blob | ArrayBuffer): Promise<PDFDocument> {
+export async function loadPdfLibDoc(file: File | Blob | ArrayBuffer): Promise<PDFDocument> {
   const bytes = file instanceof ArrayBuffer ? file : await file.arrayBuffer();
   try {
     return await PDFDocument.load(bytes);
@@ -62,62 +62,4 @@ export async function organizePdfPages(file: File, operations: PageOperation[]):
     result.addPage(page);
   });
   return result.save();
-}
-
-export type OverlayItem =
-  | {
-      type: "text";
-      /** 0-based page index. */
-      pageIndex: number;
-      /** Position as a fraction (0-1) of page width/height, measured from the top-left. */
-      xFrac: number;
-      yFrac: number;
-      text: string;
-      fontSize: number;
-      color: { r: number; g: number; b: number };
-    }
-  | {
-      type: "image";
-      pageIndex: number;
-      xFrac: number;
-      yFrac: number;
-      widthFrac: number;
-      /** PNG bytes (e.g. a drawn signature or uploaded stamp). */
-      pngBytes: ArrayBuffer;
-    };
-
-/** Draws text/signature overlays on top of a PDF's existing pages (does not alter embedded text). */
-export async function addOverlaysToPdf(file: File, overlays: OverlayItem[]): Promise<Uint8Array> {
-  const doc = await loadPdfLibDoc(file);
-  const font = await doc.embedFont(StandardFonts.Helvetica);
-  const pages = doc.getPages();
-
-  for (const overlay of overlays) {
-    const page = pages[overlay.pageIndex];
-    if (!page) continue;
-    const { width, height } = page.getSize();
-
-    if (overlay.type === "text") {
-      page.drawText(overlay.text, {
-        x: overlay.xFrac * width,
-        y: height - overlay.yFrac * height - overlay.fontSize,
-        size: overlay.fontSize,
-        font,
-        color: rgb(overlay.color.r, overlay.color.g, overlay.color.b),
-      });
-    } else {
-      const embedded = await doc.embedPng(overlay.pngBytes);
-      const drawWidth = overlay.widthFrac * width;
-      const scale = drawWidth / embedded.width;
-      const drawHeight = embedded.height * scale;
-      page.drawImage(embedded, {
-        x: overlay.xFrac * width,
-        y: height - overlay.yFrac * height - drawHeight,
-        width: drawWidth,
-        height: drawHeight,
-      });
-    }
-  }
-
-  return doc.save();
 }

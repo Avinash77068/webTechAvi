@@ -1,21 +1,10 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont } from "pdf-lib";
 import type { DocumentBlock, TextRun } from "@/lib/docx/document-blocks";
+import { hasUnsupportedCharacters, toLatin1 } from "@/lib/pdf/text-encoding";
 
 const PAGE = { width: 595.28, height: 841.89, margin: 56 };
 const LIST_INDENT = 18;
 const FONT_SIZES = { heading1: 22, heading2: 18, heading3: 15, body: 11 };
-
-/** Standard PDF fonts only cover Latin-1, so common typographic characters are mapped and the rest become "?". */
-function toLatin1(text: string): string {
-  return text
-    .replace(/[‘’]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/[–—]/g, "-")
-    .replace(/…/g, "...")
-    .replace(/•/g, "*")
-    .replace(/\t/g, "    ")
-    .replace(/[^\n\x20-\x7E\xA0-\xFF]/g, "?");
-}
 
 interface Word {
   text: string;
@@ -76,7 +65,7 @@ export async function blocksToPdf(blocks: DocumentBlock[]): Promise<{ bytes: Uin
     } else {
       orderedCounter = 0;
     }
-    if (runs.some((run) => /[^\n\x20-\x7E\xA0-\xFF\t‘’“”–—…•]/.test(run.text))) {
+    if (runs.some((run) => hasUnsupportedCharacters(run.text))) {
       hadUnsupportedText = true;
     }
 

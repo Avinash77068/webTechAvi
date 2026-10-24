@@ -331,29 +331,41 @@ export const tools: ToolDefinition[] = [
   {
     slug: "pdf-editor",
     name: "PDF Editor & Signature",
-    shortDescription: "Add text, draw a signature and place overlays on a PDF.",
-    description: "Add text boxes, draw a signature, and place overlays on top of your PDF pages, then export.",
+    shortDescription: "Add text, signatures, images and highlights to a PDF.",
+    description:
+      "Add text, draw a signature, insert images, highlight or cover areas on any page of your PDF. Move, resize and restyle every item, then export.",
     category: "pdf",
     icon: PenTool,
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["edit pdf", "sign pdf", "pdf signature"],
+    keywords: ["edit pdf", "sign pdf", "pdf signature", "add text to pdf", "highlight pdf"],
     privacyNote:
-      "Editing runs locally using pdf-lib and PDF.js. Overlays are added on top of the page, not merged into existing text.",
+      "Editing runs locally using pdf-lib and PDF.js. Your edits are drawn on top of the page, not merged into existing text.",
     faqs: [
       {
         question: "Does this edit the PDF's existing text?",
         answer:
-          "No. This tool adds new text and signature overlays on top of the page — it doesn't let you select, edit, or delete the PDF's existing embedded text or images.",
+          "No. This tool adds new text, signatures, images and highlights on top of the page. It can't select or change the PDF's existing text or images. Use the white \"Cover\" box to hide something underneath.",
+      },
+      {
+        question: "How do I move or resize something?",
+        answer:
+          "Choose the Select tool, then drag any item to move it. Images, highlights and cover boxes have a corner handle for resizing. The panel below the page changes text, size, color and opacity.",
       },
       {
         question: "How does the signature work?",
-        answer: "Draw your signature with your mouse or finger in the signature pad, then click on a page to place it. You can remove or undo it before exporting.",
+        answer:
+          "Draw your signature with your mouse or finger, then click the page to place it. It's remembered for the session so you can place it on other pages.",
       },
       {
         question: "Can I undo a mistake?",
-        answer: "Yes — use \"Undo last\" to remove the most recently placed overlay, or remove individual overlays from the list below the page.",
+        answer: "Yes. Use Undo and Redo in the toolbar or Ctrl/Cmd+Z, and press Delete to remove the selected item.",
+      },
+      {
+        question: "Why do some characters appear as question marks?",
+        answer:
+          "Text uses the PDF's built-in Helvetica font, which only supports Latin characters. Other scripts, such as Hindi, are replaced with \"?\".",
       },
     ],
     relatedSlugs: ["organize-pdf", "merge-pdf"],
