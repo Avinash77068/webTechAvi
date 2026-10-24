@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageResizerTool } from "./image-resizer-tool";
+import { ImageResizerTool } from "@/features/image-resizer";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-resizer")!;

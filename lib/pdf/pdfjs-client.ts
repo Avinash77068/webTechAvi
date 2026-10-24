@@ -79,39 +79,3 @@ export async function extractPdfPageText(
   return { text, isLikelyEmpty: trimmed.length < 3 };
 }
 
-/** Parses a page-range string like "1-3, 5, 7-9" into a sorted, deduped list of 1-based page numbers. */
-export function parsePageRanges(input: string, totalPages: number): number[] {
-  const pages = new Set<number>();
-  const parts = input
-    .split(",")
-    .map((p) => p.trim())
-    .filter(Boolean);
-
-  if (parts.length === 0) {
-    throw new Error("Enter at least one page or page range, e.g. 1-3, 5.");
-  }
-
-  for (const part of parts) {
-    const rangeMatch = part.match(/^(\d+)\s*-\s*(\d+)$/);
-    const singleMatch = part.match(/^(\d+)$/);
-
-    if (rangeMatch) {
-      const start = Number(rangeMatch[1]);
-      const end = Number(rangeMatch[2]);
-      if (start < 1 || end > totalPages || start > end) {
-        throw new Error(`"${part}" is not a valid range for a ${totalPages}-page PDF.`);
-      }
-      for (let i = start; i <= end; i++) pages.add(i);
-    } else if (singleMatch) {
-      const page = Number(singleMatch[1]);
-      if (page < 1 || page > totalPages) {
-        throw new Error(`Page ${page} doesn't exist in this ${totalPages}-page PDF.`);
-      }
-      pages.add(page);
-    } else {
-      throw new Error(`"${part}" isn't a valid page or range.`);
-    }
-  }
-
-  return Array.from(pages).sort((a, b) => a - b);
-}

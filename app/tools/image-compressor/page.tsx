@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageCompressorTool } from "./image-compressor-tool";
+import { ImageCompressorTool } from "@/features/image-compressor";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-compressor")!;

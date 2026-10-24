@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { PdfEditorTool } from "./pdf-editor-tool";
+import { PdfEditorTool } from "@/features/pdf-editor";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("pdf-editor")!;

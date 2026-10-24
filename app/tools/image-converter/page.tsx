@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageConverterTool } from "./image-converter-tool";
+import { ImageConverterTool } from "@/features/image-converter";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-converter")!;

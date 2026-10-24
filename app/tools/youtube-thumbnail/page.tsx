@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { YoutubeThumbnailTool } from "./youtube-thumbnail-tool";
+import { YoutubeThumbnailTool } from "@/features/youtube-thumbnail";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("youtube-thumbnail")!;

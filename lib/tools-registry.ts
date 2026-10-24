@@ -511,12 +511,28 @@ export const tools: ToolDefinition[] = [
     description: "Preview a local video, select the start and end times, and export the trimmed result.",
     category: "video-audio",
     icon: Scissors,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["MP4", "WebM"],
     maxFileSizeMB: 300,
     keywords: ["trim video online", "cut video"],
-    privacyNote: "Processing will run locally using ffmpeg.wasm. Large files can be slow and memory-intensive.",
-    faqs: [],
+    privacyNote: "Processing runs locally using ffmpeg.wasm. Large files can be slow and memory-intensive.",
+    faqs: [
+      {
+        question: "Why is trimming sometimes slightly off?",
+        answer:
+          "By default the clip is cut without re-encoding, which is very fast but can only start on a keyframe. Turn on \"Frame-accurate\" to re-encode the video for an exact cut, at the cost of speed.",
+      },
+      {
+        question: "Is my video uploaded anywhere?",
+        answer:
+          "No. ffmpeg runs inside your browser, so the video never leaves your device. The ffmpeg engine itself (about 30 MB) is downloaded the first time you use a video tool.",
+      },
+      {
+        question: "What file sizes work best?",
+        answer:
+          "Everything is held in your device's memory, so short clips and files under a few hundred MB work best. Very large files may fail on low-memory devices.",
+      },
+    ],
     relatedSlugs: ["video-converter", "audio-extractor"],
   },
   {
@@ -526,12 +542,27 @@ export const tools: ToolDefinition[] = [
     description: "Convert between supported video formats and compress file size with quality controls.",
     category: "video-audio",
     icon: Video,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["MP4", "WebM"],
     maxFileSizeMB: 300,
     keywords: ["video converter online", "compress video"],
-    privacyNote: "Processing will run locally using ffmpeg.wasm and can be CPU and memory intensive.",
-    faqs: [],
+    privacyNote: "Processing runs locally using ffmpeg.wasm and can be CPU and memory intensive.",
+    faqs: [
+      {
+        question: "How do I make a video smaller?",
+        answer:
+          "Choose \"Smallest file\" quality and a lower resolution such as 480p. Lower resolution has the biggest effect on file size.",
+      },
+      {
+        question: "Why is conversion slow?",
+        answer:
+          "The video is re-encoded on your own device with a single-threaded browser build of ffmpeg, so long or high-resolution videos can take several minutes.",
+      },
+      {
+        question: "Which formats are supported?",
+        answer: "You can convert MP4 and WebM videos to either MP4 (H.264) or WebM (VP8).",
+      },
+    ],
     relatedSlugs: ["video-trimmer", "audio-extractor"],
   },
   {
@@ -541,12 +572,25 @@ export const tools: ToolDefinition[] = [
     description: "Extract the audio track from a local video file and download it in a supported format.",
     category: "video-audio",
     icon: AudioLines,
-    status: "coming-soon",
+    status: "available",
     acceptedFormats: ["MP4", "WebM"],
     maxFileSizeMB: 300,
     keywords: ["extract audio from video", "video to mp3"],
-    privacyNote: "Processing will run locally using ffmpeg.wasm.",
-    faqs: [],
+    privacyNote: "Processing runs locally using ffmpeg.wasm.",
+    faqs: [
+      {
+        question: "Which audio formats can I export?",
+        answer: "MP3 and M4A (AAC) at 192 kbps, or lossless WAV, which is much larger.",
+      },
+      {
+        question: "What if the video has no sound?",
+        answer: "The tool will report an error because there is no audio track to extract.",
+      },
+      {
+        question: "Is my video uploaded anywhere?",
+        answer: "No. The audio is extracted in your browser using ffmpeg.wasm and never leaves your device.",
+      },
+    ],
     relatedSlugs: ["video-trimmer", "video-converter"],
   },
   {

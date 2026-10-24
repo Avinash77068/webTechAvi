@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { PdfTextExtractorTool } from "./pdf-text-extractor-tool";
+import { PdfTextExtractorTool } from "@/features/pdf-text-extractor";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("pdf-text-extractor")!;

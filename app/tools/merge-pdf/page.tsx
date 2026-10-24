@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { MergePdfTool } from "./merge-pdf-tool";
+import { MergePdfTool } from "@/features/merge-pdf";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("merge-pdf")!;

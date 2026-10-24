@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageCropperTool } from "./image-cropper-tool";
+import { ImageCropperTool } from "@/features/image-cropper";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-cropper")!;

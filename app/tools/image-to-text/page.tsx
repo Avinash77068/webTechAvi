@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageToTextTool } from "./image-to-text-tool";
+import { ImageToTextTool } from "@/features/image-to-text";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-to-text")!;

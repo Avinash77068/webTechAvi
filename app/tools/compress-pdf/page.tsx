@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { CompressPdfTool } from "./compress-pdf-tool";
+import { CompressPdfTool } from "@/features/compress-pdf";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("compress-pdf")!;

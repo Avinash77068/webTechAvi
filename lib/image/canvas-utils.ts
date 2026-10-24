@@ -1,6 +1,6 @@
 export type OutputImageFormat = "jpeg" | "png" | "webp";
 
-export const formatToMime: Record<OutputImageFormat, string> = {
+const formatToMime: Record<OutputImageFormat, string> = {
   jpeg: "image/jpeg",
   png: "image/png",
   webp: "image/webp",
@@ -93,8 +93,4 @@ export function calculateResize(
     width: Math.max(1, Math.round(width ?? ow)),
     height: Math.max(1, Math.round(height ?? oh)),
   };
-}
-
-export function revokeObjectUrl(url: string | undefined | null): void {
-  if (url) URL.revokeObjectURL(url);
 }

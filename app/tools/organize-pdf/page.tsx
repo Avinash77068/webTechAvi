@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { OrganizePdfTool } from "./organize-pdf-tool";
+import { OrganizePdfTool } from "@/features/organize-pdf";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("organize-pdf")!;

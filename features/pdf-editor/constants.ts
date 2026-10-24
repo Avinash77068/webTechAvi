@@ -1,0 +1,1 @@
+export const PREVIEW_WIDTH_PT_TARGET = 700;

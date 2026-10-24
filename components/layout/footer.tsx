@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
@@ -9,9 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-              <span className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Sparkles className="size-4" aria-hidden="true" />
-              </span>
+              <Image src="/logo.png" alt="" width={28} height={28} className="size-7 rounded-lg" />
               <span>{siteConfig.name}</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">{siteConfig.description}</p>

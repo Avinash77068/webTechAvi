@@ -11,11 +11,6 @@ async function loadPdfLibDoc(file: File | Blob | ArrayBuffer): Promise<PDFDocume
   }
 }
 
-export async function getPdfPageCount(file: File): Promise<number> {
-  const doc = await loadPdfLibDoc(file);
-  return doc.getPageCount();
-}
-
 /** Merges multiple PDFs in the given order into one document. */
 export async function mergePdfFiles(files: File[]): Promise<Uint8Array> {
   if (files.length < 2) {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { ImageToPdfTool } from "./image-to-pdf-tool";
+import { ImageToPdfTool } from "@/features/image-to-pdf";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-to-pdf")!;

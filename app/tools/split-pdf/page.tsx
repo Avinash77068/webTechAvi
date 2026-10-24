@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
-import { SplitPdfTool } from "./split-pdf-tool";
+import { SplitPdfTool } from "@/features/split-pdf";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("split-pdf")!;
