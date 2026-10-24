@@ -171,39 +171,6 @@
   color: var(--foreground);
 }
 
-.brand-mark {
-  position: relative;
-  display: inline-flex;
-  width: 2.15rem;
-  height: 2.15rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid oklch(0.82 0.09 218 / 42%);
-  border-radius: 0.72rem;
-  background: linear-gradient(145deg, #12c7f5 0%, #1685ff 48%, #1452dc 100%);
-  box-shadow: 0 0 24px oklch(0.62 0.22 250 / 25%);
-  color: white;
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: -0.18em;
-  line-height: 1;
-}
-
-.brand-mark span:first-child {
-  transform: translate(-2px, -1px);
-}
-
-.brand-mark span:last-child {
-  position: absolute;
-  right: 5px;
-  bottom: 4px;
-  color: #d7f7ff;
-  font-size: 0.88rem;
-  text-shadow: 0 1px 4px #0751bc;
-}
-
 .brand-word {
   color: var(--foreground);
   font-size: 1.05rem;
@@ -259,14 +226,14 @@
 
 .hero-title-accent {
   color: #126fd0;
-  background: linear-gradient(95deg, #1179c8 0%, #145bd0 55%, #286fde 100%);
+  /* background: linear-gradient(95deg, #1179c8 0%, #145bd0 55%, #286fde 100%); */
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .dark .hero-title-accent {
   color: #46b8ff;
-  background: linear-gradient(95deg, #61c8ff 0%, #3295ff 55%, #1687ff 100%);
+  /* background: linear-gradient(95deg, #61c8ff 0%, #3295ff 55%, #1687ff 100%); */
 }
 
 .hero-toolkit {
