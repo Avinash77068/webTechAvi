@@ -77,8 +77,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <TooltipProvider delay={200}>

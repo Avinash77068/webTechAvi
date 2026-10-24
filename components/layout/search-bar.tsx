@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -61,20 +61,34 @@ export function SearchBar({
     router.push(`/tools/${tool.slug}`);
   }
 
+  function submitSearch() {
+    const search = query.trim() ? `?q=${encodeURIComponent(query.trim())}` : "";
+    setOpen(false);
+    router.push(`/tools${search}`);
+  }
+
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Escape") {
+      setOpen(false);
+      return;
+    }
+
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const chosen = open ? results[activeIndex] ?? results[0] : undefined;
+      if (chosen?.status === "available") goToTool(chosen);
+      else submitSearch();
+      return;
+    }
+
     if (!open || results.length === 0) return;
+
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setActiveIndex((i) => (i + 1) % results.length);
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setActiveIndex((i) => (i <= 0 ? results.length - 1 : i - 1));
-    } else if (event.key === "Enter") {
-      event.preventDefault();
-      const chosen = results[activeIndex] ?? results[0];
-      if (chosen) goToTool(chosen);
-    } else if (event.key === "Escape") {
-      setOpen(false);
     }
   }
 
@@ -82,7 +96,7 @@ export function SearchBar({
     <div ref={containerRef} className={cn("relative w-full", className)}>
       <div className="relative">
         <Search
-          className="pointer-events-none absolute top-1/2 left-3.5 size-4.5 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute top-1/2 left-4 size-4.5 -translate-y-1/2 text-sky-300/90"
           aria-hidden="true"
         />
         <Input
@@ -102,17 +116,27 @@ export function SearchBar({
           placeholder={placeholder}
           aria-label="Search tools"
           className={cn(
-            "w-full pl-11",
-            variant === "hero" && "h-14 rounded-2xl pl-12 text-base shadow-sm"
+            "h-10 w-full rounded-full border-border/90 bg-card/75 pl-11 text-sm text-foreground placeholder:text-muted-foreground/85 focus-visible:border-primary/75 focus-visible:ring-primary/25",
+            variant === "hero" && "h-[3.55rem] rounded-[1rem] border-sky-400/65 bg-[#08182c]/85 pl-12 pr-16 text-base shadow-[0_12px_38px_rgba(0,0,0,0.22)] placeholder:text-slate-400 focus-visible:border-sky-300 focus-visible:ring-sky-400/25"
           )}
         />
+        {variant === "hero" && (
+          <button
+            type="button"
+            onClick={submitSearch}
+            aria-label="Search tools"
+            className="absolute top-1/2 right-1.5 flex size-11 -translate-y-1/2 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-lg shadow-blue-950/35 transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+          >
+            <ArrowRight className="size-5" aria-hidden="true" />
+          </button>
+        )}
       </div>
 
       {open && query.trim() && (
         <ul
           id={listboxId}
           role="listbox"
-          className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-border bg-popover p-1.5 shadow-lg"
+          className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-border bg-popover p-1.5 shadow-2xl shadow-black/25"
         >
           {results.length === 0 ? (
             <li className="px-3 py-6 text-center text-sm text-muted-foreground">

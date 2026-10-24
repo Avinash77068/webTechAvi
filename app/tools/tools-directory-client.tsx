@@ -46,14 +46,14 @@ export function ToolsDirectoryClient() {
 
   return (
     <div>
-      <div className="relative max-w-md">
-        <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+      <div className="directory-search relative max-w-lg">
+        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-sky-300" aria-hidden="true" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search tools…"
           aria-label="Search tools"
-          className="pl-10"
+          className="h-12 rounded-[0.9rem] border-0 bg-transparent pl-11 text-sm shadow-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/35"
         />
       </div>
 
@@ -67,25 +67,45 @@ export function ToolsDirectoryClient() {
             variant={activeCategory === category.value ? "default" : "outline"}
             size="sm"
             onClick={() => selectCategory(category.value)}
-            className={cn("rounded-full")}
+            className={cn(
+              "h-8 rounded-full px-3.5 transition-all",
+              activeCategory === category.value
+                ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md shadow-blue-950/25 hover:from-sky-400 hover:to-blue-500"
+                : "border-border bg-card/35 text-muted-foreground hover:border-primary/50 hover:bg-accent hover:text-foreground",
+            )}
           >
             {category.label}
           </Button>
         ))}
       </div>
 
-      <p className="mt-6 text-sm text-muted-foreground" aria-live="polite">
-        {filteredTools.length} tool{filteredTools.length === 1 ? "" : "s"} found
-      </p>
+      <div className="mt-6 flex items-center justify-between gap-3">
+        <p className="text-sm font-medium text-muted-foreground" aria-live="polite">
+          {filteredTools.length} tool{filteredTools.length === 1 ? "" : "s"} found
+        </p>
+        {(query || activeCategory !== "all") && (
+          <button
+            type="button"
+            onClick={() => {
+              setQuery("");
+              setActiveCategory("all");
+              router.replace("/tools", { scroll: false });
+            }}
+            className="text-xs font-semibold text-sky-300 transition-colors hover:text-sky-100"
+          >
+            Clear filters
+          </button>
+        )}
+      </div>
 
-      <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {filteredTools.map((tool) => (
           <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
 
       {filteredTools.length === 0 && (
-        <div className="mt-10 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
+        <div className="mt-6 rounded-2xl border border-dashed border-border bg-card/40 p-10 text-center text-muted-foreground">
           No tools match your search. Try a different keyword or category.
         </div>
       )}

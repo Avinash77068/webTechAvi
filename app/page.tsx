@@ -3,7 +3,6 @@ import { Hero } from "@/components/home/hero";
 import { PopularTools } from "@/components/home/popular-tools";
 import { CategorySections } from "@/components/home/category-sections";
 import { HowItWorks } from "@/components/home/how-it-works";
-import { PrivacySection } from "@/components/home/privacy-section";
 import { FaqSection } from "@/components/tools/faq-section";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { homeFaqs } from "@/lib/site-faqs";
@@ -22,7 +21,6 @@ export default function HomePage() {
       <PopularTools />
       <CategorySections />
       <HowItWorks />
-      <PrivacySection />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AdSlot placement="homepage-leaderboard" />
       </div>
