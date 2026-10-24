@@ -25,7 +25,7 @@ import { categoryMeta, getToolsByCategory, type ToolCategory } from "@/lib/tools
 const categoryLinks = Object.entries(categoryMeta).map(([slug, meta]) => ({
   slug,
   label: meta.label,
-  tools: getToolsByCategory(slug as ToolCategory).filter((t) => t.status === "available"),
+  tools: getToolsByCategory(slug as ToolCategory),
 }));
 
 export function Header() {
@@ -51,12 +51,20 @@ export function Header() {
                 <ChevronDown className="size-3.5" aria-hidden="true" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-60">
-                {category.tools.map((tool) => (
-                  <DropdownMenuItem key={tool.slug} render={<Link href={`/tools/${tool.slug}`} />}>
-                    <tool.icon className="size-4" aria-hidden="true" />
-                    {tool.name}
-                  </DropdownMenuItem>
-                ))}
+                {category.tools.map((tool) =>
+                  tool.status === "available" ? (
+                    <DropdownMenuItem key={tool.slug} render={<Link href={`/tools/${tool.slug}`} />}>
+                      <tool.icon className="size-4" aria-hidden="true" />
+                      {tool.name}
+                    </DropdownMenuItem>
+                  ) : (
+                    <DropdownMenuItem key={tool.slug} disabled>
+                      <tool.icon className="size-4" aria-hidden="true" />
+                      {tool.name}
+                      <span className="ml-auto text-xs text-muted-foreground">Soon</span>
+                    </DropdownMenuItem>
+                  ),
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           ))}
@@ -92,7 +100,7 @@ export function Header() {
                       <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                         {category.label}
                       </p>
-                      {category.tools.map((tool) => (
+                      {category.tools.filter((t) => t.status === "available").map((tool) => (
                         <Link
                           key={tool.slug}
                           href={`/tools/${tool.slug}`}
