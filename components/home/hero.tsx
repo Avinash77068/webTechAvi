@@ -58,7 +58,7 @@ export function Hero() {
 
         {/* Right Side */}
         <div className="relative mx-auto w-full max-w-lg">
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-xl">
+          <div className="rounded-2xl cursor-pointer border border-border bg-card p-6 shadow-xl">
             <div className="mb-6 flex items-center gap-3">
               <div className="rounded-xl bg-primary/10 p-3">
                 <Sparkles className="size-6 text-primary" />
