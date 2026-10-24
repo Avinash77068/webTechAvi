@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "pdf-lib/src/*": ["./node_modules/pdf-lib/cjs/*"]
     }
   },
   "include": [
