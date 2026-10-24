@@ -28,7 +28,7 @@ export function ToolCard({ tool, className }: { tool: ToolDefinition; className?
         </span>
       </span>
       {isAvailable && (
-        <ArrowUpRight className="size-4 shrink-0 text-sky-300/75 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+        <ArrowUpRight className="size-4 shrink-0 text-primary/75 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
       )}
     </>
   );

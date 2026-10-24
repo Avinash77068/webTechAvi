@@ -40,17 +40,17 @@ export function ToolPageLayout({
                 <br />
                 <span className="hero-title-accent">Simple, Fast, Private.</span>
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg lg:mx-0">
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg lg:mx-0">
                 {tool.description}
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-2 lg:justify-start">
                 {[
                   { icon: Zap, label: "No sign-up required" },
-                  { icon: Lock, label: "Processed in your browser" },
+                  { icon: Lock, label: "Processing details are clear" },
                   { icon: Sparkles, label: "100% free" },
                 ].map(({ icon: TrustIcon, label }) => (
-                  <span key={label} className="flex items-center gap-2">
-                    <TrustIcon className="size-4 shrink-0 text-sky-300" aria-hidden="true" />
+                  <span key={label} className="flex items-center gap-2 rounded-full border border-border bg-card/45 px-3 py-2 text-xs text-muted-foreground">
+                    <TrustIcon className="size-4 shrink-0 text-primary" aria-hidden="true" />
                     {label}
                   </span>
                 ))}
@@ -67,15 +67,15 @@ export function ToolPageLayout({
                   <p className="text-sm text-muted-foreground">{tool.shortDescription}</p>
                 </div>
               </div>
-              <div className="rounded-xl border border-slate-600/65 bg-slate-950/25 p-4 text-sm">
+              <div className="rounded-xl border border-border bg-background/70 p-4 text-sm">
                 <h3 className="font-semibold">Supported formats</h3>
                 <p className="mt-1 text-muted-foreground">{tool.acceptedFormats.join(", ")}</p>
                 {tool.maxFileSizeMB > 0 && (
                   <p className="mt-1 text-muted-foreground">Max file size: {tool.maxFileSizeMB} MB per file</p>
                 )}
               </div>
-              <div className="mt-4 flex items-center gap-2 rounded-xl border border-sky-300/15 bg-sky-300/[0.07] p-4 text-sm text-slate-200">
-                <Lock className="size-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <div className="mt-4 flex items-center gap-2 rounded-xl border border-primary/15 bg-primary/[0.07] p-4 text-sm text-foreground">
+                <Lock className="size-4 shrink-0 text-primary" aria-hidden="true" />
                 <span>{tool.privacyNote}</span>
               </div>
             </div>
@@ -107,7 +107,7 @@ export function ToolPageLayout({
       />
 
       <div className="mt-5 max-w-4xl">
-        <p className="text-[0.67rem] font-bold uppercase tracking-[0.16em] text-sky-300">{categoryMeta[tool.category].label}</p>
+        <p className="text-[0.67rem] font-bold uppercase tracking-[0.16em] text-primary">{categoryMeta[tool.category].label}</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{tool.name}</h1>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">{tool.description}</p>
       </div>

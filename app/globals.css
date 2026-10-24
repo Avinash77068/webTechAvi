@@ -212,7 +212,7 @@
 }
 
 .brand-word span {
-  color: #35a9ff;
+  color: var(--primary);
 }
 
 .hero-section {
@@ -220,6 +220,12 @@
   isolation: isolate;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 80% 38%, oklch(0.86 0.08 245 / 30%), transparent 39%),
+    linear-gradient(112deg, oklch(0.99 0.006 255), oklch(0.97 0.018 250) 52%, oklch(0.985 0.008 255));
+}
+
+.dark .hero-section {
   background:
     radial-gradient(ellipse at 80% 38%, oklch(0.28 0.105 245 / 27%), transparent 39%),
     linear-gradient(112deg, oklch(0.15 0.03 258), oklch(0.17 0.04 253) 52%, oklch(0.15 0.03 258));
@@ -252,28 +258,50 @@
 }
 
 .hero-title-accent {
-  color: #46b8ff;
-  background: linear-gradient(95deg, #61c8ff 0%, #3295ff 55%, #1687ff 100%);
+  color: #126fd0;
+  background: linear-gradient(95deg, #1179c8 0%, #145bd0 55%, #286fde 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.dark .hero-title-accent {
+  color: #46b8ff;
+  background: linear-gradient(95deg, #61c8ff 0%, #3295ff 55%, #1687ff 100%);
+}
+
 .hero-toolkit {
-  border: 1px solid oklch(0.55 0.14 250 / 60%);
+  border: 1px solid var(--border);
   border-radius: 1.35rem;
+  background: linear-gradient(145deg, color-mix(in oklch, var(--card), white 8%), var(--card));
+  box-shadow: 0 24px 72px oklch(0.25 0.06 255 / 10%), inset 0 1px 0 white;
+}
+
+.dark .hero-toolkit {
+  border-color: oklch(0.55 0.14 250 / 60%);
   background: linear-gradient(145deg, oklch(0.2 0.05 255 / 94%), oklch(0.16 0.03 258 / 96%));
   box-shadow: 0 24px 72px oklch(0.05 0.025 260 / 48%), inset 0 1px 0 oklch(0.82 0.08 245 / 8%);
 }
 
 .hero-category-card {
-  border: 1px solid oklch(0.4 0.05 250 / 64%);
+  border: 1px solid var(--border);
   border-radius: 0.9rem;
-  background: linear-gradient(145deg, oklch(0.2 0.035 255 / 75%), oklch(0.16 0.026 258 / 82%));
+  background: linear-gradient(145deg, color-mix(in oklch, var(--card), white 4%), var(--card));
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dark .hero-category-card {
+  border-color: oklch(0.4 0.05 250 / 64%);
+  background: linear-gradient(145deg, oklch(0.2 0.035 255 / 75%), oklch(0.16 0.026 258 / 82%));
 }
 
 .hero-category-card:hover {
   transform: translateY(-2px);
+  border-color: color-mix(in oklch, var(--primary), transparent 35%);
+  background: color-mix(in oklch, var(--accent), var(--card) 50%);
+  box-shadow: 0 10px 28px oklch(0.25 0.04 255 / 12%);
+}
+
+.dark .hero-category-card:hover {
   border-color: oklch(0.68 0.18 252 / 76%);
   background: oklch(0.23 0.05 253 / 90%);
   box-shadow: 0 10px 28px oklch(0.08 0.04 255 / 35%);
@@ -289,14 +317,19 @@
 
 .tool-card:hover {
   transform: translateY(-2px);
-  border-color: oklch(0.65 0.17 252 / 65%);
-  box-shadow: 0 12px 30px oklch(0.07 0.035 255 / 25%);
+  border-color: color-mix(in oklch, var(--primary), transparent 35%);
+  box-shadow: 0 12px 30px oklch(0.25 0.035 255 / 12%);
 }
 
-.tool-card-icon--image { background: oklch(0.62 0.18 226 / 17%); color: oklch(0.79 0.14 220); }
-.tool-card-icon--pdf { background: oklch(0.63 0.21 25 / 18%); color: oklch(0.78 0.17 25); }
-.tool-card-icon--document { background: oklch(0.62 0.18 150 / 17%); color: oklch(0.78 0.15 155); }
-.tool-card-icon--video-audio { background: oklch(0.62 0.19 300 / 18%); color: oklch(0.78 0.16 300); }
+.tool-card-icon--image { background: oklch(0.92 0.05 225); color: oklch(0.43 0.14 230); }
+.tool-card-icon--pdf { background: oklch(0.94 0.045 25); color: oklch(0.48 0.18 25); }
+.tool-card-icon--document { background: oklch(0.93 0.055 150); color: oklch(0.43 0.13 150); }
+.tool-card-icon--video-audio { background: oklch(0.93 0.05 300); color: oklch(0.46 0.17 300); }
+
+.dark .tool-card-icon--image { background: oklch(0.62 0.18 226 / 17%); color: oklch(0.79 0.14 220); }
+.dark .tool-card-icon--pdf { background: oklch(0.63 0.21 25 / 18%); color: oklch(0.78 0.17 25); }
+.dark .tool-card-icon--document { background: oklch(0.62 0.18 150 / 17%); color: oklch(0.78 0.15 155); }
+.dark .tool-card-icon--video-audio { background: oklch(0.62 0.19 300 / 18%); color: oklch(0.78 0.16 300); }
 
 .step-card {
   border: 1px solid color-mix(in oklch, var(--border), transparent 12%);

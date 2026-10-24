@@ -5,10 +5,10 @@ import { categoryMeta, getToolsByCategory, type ToolCategory } from "@/lib/tools
 
 const categoryOrder: ToolCategory[] = ["image", "pdf", "document", "video-audio"];
 const categoryIcons = {
-  image: { icon: FileImage, className: "bg-sky-400/15 text-sky-300" },
-  pdf: { icon: FileText, className: "bg-rose-400/15 text-rose-300" },
-  document: { icon: Files, className: "bg-emerald-400/15 text-emerald-300" },
-  "video-audio": { icon: Video, className: "bg-violet-400/15 text-violet-300" },
+  image: { icon: FileImage, className: "tool-card-icon--image" },
+  pdf: { icon: FileText, className: "tool-card-icon--pdf" },
+  document: { icon: Files, className: "tool-card-icon--document" },
+  "video-audio": { icon: Video, className: "tool-card-icon--video-audio" },
 } satisfies Record<ToolCategory, { icon: typeof FileImage; className: string }>;
 
 export function CategorySections() {
@@ -34,7 +34,7 @@ export function CategorySections() {
                 </div>
                 <Link
                   href={`/tools?category=${category}`}
-                  className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-sky-300 transition-colors hover:text-sky-100 sm:text-sm"
+                  className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-primary transition-colors hover:text-primary/80 sm:text-sm"
                 >
                   View all <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>

@@ -47,7 +47,7 @@ export function ToolsDirectoryClient() {
   return (
     <div>
       <div className="directory-search relative max-w-lg">
-        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-sky-300" aria-hidden="true" />
+        <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-primary" aria-hidden="true" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -91,7 +91,7 @@ export function ToolsDirectoryClient() {
               setActiveCategory("all");
               router.replace("/tools", { scroll: false });
             }}
-            className="text-xs font-semibold text-sky-300 transition-colors hover:text-sky-100"
+            className="text-xs font-semibold text-primary transition-colors hover:text-primary/80"
           >
             Clear filters
           </button>

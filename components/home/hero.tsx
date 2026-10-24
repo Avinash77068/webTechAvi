@@ -19,28 +19,28 @@ const toolkitCards = [
     description: "Compress, resize & convert images",
     href: "/tools?category=image",
     icon: FileImage,
-    iconClass: "bg-emerald-400/15 text-emerald-300",
+    iconClass: "tool-card-icon--image",
   },
   {
     label: categoryMeta.pdf.label,
     description: "Merge, split & organize PDFs",
     href: "/tools?category=pdf",
     icon: FileText,
-    iconClass: "bg-rose-400/15 text-rose-300",
+    iconClass: "tool-card-icon--pdf",
   },
   {
     label: categoryMeta.document.label,
     description: "Edit and convert documents",
     href: "/tools?category=document",
     icon: ScanText,
-    iconClass: "bg-violet-400/15 text-violet-300",
+    iconClass: "tool-card-icon--document",
   },
   {
     label: categoryMeta["video-audio"].label,
     description: "Trim video & extract audio",
     href: "/tools?category=video-audio",
     icon: Video,
-    iconClass: "bg-cyan-400/15 text-cyan-300",
+    iconClass: "tool-card-icon--video-audio",
   },
 ];
 
@@ -55,18 +55,18 @@ export function Hero() {
     <section className="hero-section">
       <div className="relative mx-auto grid max-w-7xl items-center gap-11 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-14 lg:px-8 lg:py-[4.5rem]">
         <div className="relative z-10 text-center lg:text-left">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/[0.08] px-3.5 py-1.5 text-xs font-semibold tracking-wide text-sky-200">
-            <Sparkles className="size-3.5 text-sky-300" aria-hidden="true" />
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-primary">
+            <Sparkles className="size-3.5" aria-hidden="true" />
             100% free online tools
           </div>
 
-          <h1 className="mx-auto max-w-3xl text-[2.65rem] leading-[1.08] font-bold tracking-[-0.055em] text-balance text-white sm:text-5xl lg:mx-0 lg:text-[3.9rem]">
+          <h1 className="mx-auto max-w-3xl text-[2.65rem] leading-[1.08] font-bold tracking-[-0.055em] text-balance text-foreground sm:text-5xl lg:mx-0 lg:text-[3.9rem]">
             Free Online Tools.
             <br />
             <span className="hero-title-accent">Simple, Fast, Private.</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-[39rem] text-base leading-7 text-slate-300 sm:text-[1.05rem] lg:mx-0">
+          <p className="mx-auto mt-5 max-w-[39rem] text-base leading-7 text-muted-foreground sm:text-[1.05rem] lg:mx-0">
             Compress images, merge PDFs, extract text and more. Most tools run right in your browser, with no sign-up and no upload unless a tool clearly says otherwise.
           </p>
 
@@ -79,14 +79,14 @@ export function Hero() {
               <Link
                 key={slug}
                 href={`/tools?category=${slug}`}
-                className="rounded-full border border-slate-600/80 bg-slate-950/25 px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-sky-400/70 hover:bg-sky-400/10 hover:text-white sm:text-sm"
+                className="rounded-full border border-border bg-card/45 px-3.5 py-1.5 text-xs font-semibold text-foreground/85 transition-colors hover:border-primary/50 hover:bg-accent hover:text-foreground sm:text-sm"
               >
                 {meta.label}
               </Link>
             ))}
             <Link
               href="/tools"
-              className="rounded-full border border-slate-600/80 bg-slate-950/25 px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-sky-400/70 hover:bg-sky-400/10 hover:text-white sm:text-sm"
+              className="rounded-full border border-border bg-card/45 px-3.5 py-1.5 text-xs font-semibold text-foreground/85 transition-colors hover:border-primary/50 hover:bg-accent hover:text-foreground sm:text-sm"
             >
               All Tools
             </Link>
@@ -94,13 +94,13 @@ export function Hero() {
 
           <div className="mx-auto mt-8 grid max-w-[42rem] grid-cols-1 gap-3 text-left sm:grid-cols-3 sm:gap-2 lg:mx-0">
             {trustPoints.map(({ icon: Icon, label, detail }) => (
-              <div key={label} className="flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-slate-950/25 px-3 py-2.5 sm:border-transparent sm:bg-transparent sm:px-0">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-sky-400/10 text-sky-300">
+              <div key={label} className="flex items-center gap-2.5 rounded-xl border border-border/70 bg-card/40 px-3 py-2.5 sm:border-transparent sm:bg-transparent sm:px-0">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Icon className="size-4" aria-hidden="true" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-xs font-semibold text-slate-100 sm:text-[0.7rem]">{label}</span>
-                  <span className="mt-0.5 block text-[0.68rem] text-slate-400">{detail}</span>
+                  <span className="block text-xs font-semibold text-foreground sm:text-[0.7rem]">{label}</span>
+                  <span className="mt-0.5 block text-[0.68rem] text-muted-foreground">{detail}</span>
                 </span>
               </div>
             ))}
@@ -114,10 +114,10 @@ export function Hero() {
                 <Sparkles className="size-5" aria-hidden="true" />
               </span>
               <div>
-                <h2 className="text-lg font-bold tracking-tight text-white sm:text-xl">All-in-One Toolkit</h2>
-                <p className="mt-0.5 text-xs text-slate-400 sm:text-sm">Everything you need, in one place.</p>
+                <h2 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">All-in-One Toolkit</h2>
+                <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">Everything you need, in one place.</p>
               </div>
-              <span className="ml-auto hidden rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-[0.65rem] font-semibold text-emerald-200 sm:inline-flex">
+              <span className="ml-auto hidden rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[0.65rem] font-semibold text-emerald-700 dark:text-emerald-200 sm:inline-flex">
                 {getAvailableTools().length} tools
               </span>
             </div>
@@ -128,20 +128,20 @@ export function Hero() {
                   <span className={`flex size-9 items-center justify-center rounded-xl ${iconClass}`}>
                     <Icon className="size-[1.1rem]" aria-hidden="true" />
                   </span>
-                  <span className="mt-3 flex w-full items-center justify-between gap-1 text-sm font-semibold text-white sm:text-[0.95rem]">
+                  <span className="mt-3 flex w-full items-center justify-between gap-1 text-sm font-semibold text-foreground sm:text-[0.95rem]">
                     {label}
-                    <ArrowRight className="size-4 shrink-0 text-sky-300 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    <ArrowRight className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                   </span>
-                  <span className="mt-1 text-[0.7rem] leading-4 text-slate-400 sm:text-xs">{description}</span>
+                  <span className="mt-1 text-[0.7rem] leading-4 text-muted-foreground sm:text-xs">{description}</span>
                 </Link>
               ))}
             </div>
 
-            <div className="mt-4 flex items-start gap-3 rounded-xl border border-blue-400/20 bg-blue-500/[0.1] px-3.5 py-3 sm:mt-5 sm:items-center sm:px-4">
-              <LockKeyhole className="mt-0.5 size-4 shrink-0 text-sky-300 sm:mt-0" aria-hidden="true" />
+            <div className="mt-4 flex items-start gap-3 rounded-xl border border-primary/20 bg-primary/10 px-3.5 py-3 sm:mt-5 sm:items-center sm:px-4">
+              <LockKeyhole className="mt-0.5 size-4 shrink-0 text-primary sm:mt-0" aria-hidden="true" />
               <div>
-                <p className="text-xs font-semibold text-sky-100 sm:text-sm">No account required.</p>
-                <p className="mt-0.5 text-[0.68rem] leading-4 text-slate-400">Processing details are clear on every tool.</p>
+                <p className="text-xs font-semibold text-foreground sm:text-sm">No account required.</p>
+                <p className="mt-0.5 text-[0.68rem] leading-4 text-muted-foreground">Processing details are clear on every tool.</p>
               </div>
             </div>
           </div>

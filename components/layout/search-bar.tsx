@@ -96,7 +96,7 @@ export function SearchBar({
     <div ref={containerRef} className={cn("relative w-full", className)}>
       <div className="relative">
         <Search
-          className="pointer-events-none absolute top-1/2 left-4 size-4.5 -translate-y-1/2 text-sky-300/90"
+          className="pointer-events-none absolute top-1/2 left-4 size-4.5 -translate-y-1/2 text-primary"
           aria-hidden="true"
         />
         <Input
@@ -117,7 +117,7 @@ export function SearchBar({
           aria-label="Search tools"
           className={cn(
             "h-10 w-full rounded-full border-border/90 bg-card/75 pl-11 text-sm text-foreground placeholder:text-muted-foreground/85 focus-visible:border-primary/75 focus-visible:ring-primary/25",
-            variant === "hero" && "h-[3.55rem] rounded-[1rem] border-sky-400/65 bg-[#08182c]/85 pl-12 pr-16 text-base shadow-[0_12px_38px_rgba(0,0,0,0.22)] placeholder:text-slate-400 focus-visible:border-sky-300 focus-visible:ring-sky-400/25"
+            variant === "hero" && "h-[3.55rem] rounded-[1rem] border-primary/35 bg-card/95 pl-12 pr-16 text-base shadow-[0_12px_38px_rgba(0,0,0,0.12)] placeholder:text-muted-foreground focus-visible:border-primary/70 focus-visible:ring-primary/25"
           )}
         />
         {variant === "hero" && (
