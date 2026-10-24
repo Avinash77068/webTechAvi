@@ -1,18 +1,30 @@
 import type { FFmpeg } from "@ffmpeg/ffmpeg";
 
+/**
+ * The ffmpeg wrapper is served untouched from /public/ffmpeg (copied from
+ * @ffmpeg/ffmpeg/dist/esm) and imported at runtime. Bundling it breaks because it
+ * creates its worker from a dynamic URL that Turbopack and webpack cannot resolve.
+ */
+const FFMPEG_MODULE_URL = "/ffmpeg/index.js";
+
 const CORE_VERSION = "0.12.10";
-const CORE_BASE_URL = `https://unpkg.com/@ffmpeg/core@${CORE_VERSION}/dist/umd`;
+const CORE_BASE_URL = `https://unpkg.com/@ffmpeg/core@${CORE_VERSION}/dist/esm`;
 
 let instance: Promise<FFmpeg> | null = null;
+
+async function toBlobURL(url: string, mimeType: string): Promise<string> {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Couldn't download the video engine. Check your connection and try again.");
+  return URL.createObjectURL(new Blob([await response.arrayBuffer()], { type: mimeType }));
+}
 
 /** Loads ffmpeg.wasm once and reuses it, so the ~30 MB core is only downloaded on first use. */
 function getFfmpeg(): Promise<FFmpeg> {
   if (!instance) {
     instance = (async () => {
-      const [{ FFmpeg }, { toBlobURL }] = await Promise.all([
-        import("@ffmpeg/ffmpeg"),
-        import("@ffmpeg/util"),
-      ]);
+      const { FFmpeg } = (await import(
+        /* webpackIgnore: true */ /* turbopackIgnore: true */ FFMPEG_MODULE_URL
+      )) as typeof import("@ffmpeg/ffmpeg");
       const ffmpeg = new FFmpeg();
       await ffmpeg.load({
         coreURL: await toBlobURL(`${CORE_BASE_URL}/ffmpeg-core.js`, "text/javascript"),
