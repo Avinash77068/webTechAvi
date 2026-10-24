@@ -10,6 +10,8 @@ import { AdConsent } from "@/components/ads/ad-consent";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
 
+export const dynamic = "force-dynamic";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
