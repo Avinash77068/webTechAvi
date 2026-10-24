@@ -12,7 +12,7 @@ const trustPoints = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/5 via-background to-background">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-12">
 
         {/* Left Side */}
         <div className="text-center lg:text-left">
