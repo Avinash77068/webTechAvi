@@ -29,9 +29,6 @@ export default function HomePage() {
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
         <FaqSection faqs={homeFaqs} />
       </section>
-      <div className="mx-auto w-full max-w-4xl px-4 pb-10 sm:px-6">
-        <AdSlot placement="between-content" />
-      </div>
     </>
   );
 }
