@@ -38,4 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
  git remote set-url origin git@github-webtechavi:webtechavi0-ai/techsutra.git
-  git remote set-url origin git@github.com:Avinash77068/webTechAvi.git 
+ git remote set-url origin git@github.com:Avinash77068/webTechAvi.git 
