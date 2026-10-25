@@ -6,8 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("image-to-text")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
-  description: tool.shortDescription,
+  title: "Image to Text Converter (OCR) Online Free",
+  description:
+    "Extract text from images online with OCR. Convert photos and screenshots to editable text in English or Hindi, processed on your device.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });

@@ -6,8 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("image-compressor")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
-  description: tool.shortDescription,
+  title: "Free Image Compressor Online – JPG, PNG & WebP",
+  description:
+    "Compress JPG, PNG and WebP images online for free. Adjust quality, compare file sizes and download smaller images processed in your browser.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });

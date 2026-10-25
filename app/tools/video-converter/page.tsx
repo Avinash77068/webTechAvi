@@ -6,8 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("video-converter")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
-  description: tool.shortDescription,
+  title: "Video Converter & Compressor Online Free",
+  description:
+    "Convert or compress MP4 and WebM videos online. Choose an output format, quality and resolution, then download the processed video.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });

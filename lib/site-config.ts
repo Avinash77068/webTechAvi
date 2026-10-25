@@ -2,8 +2,8 @@ export const siteConfig = {
   name: "TechSutra",
   tagline: "Free Online Tools. Simple, Fast, Private.",
   description:
-    "Free online tools for images, PDFs, documents, video and audio. Compress, convert, merge, edit and extract text — all processed in your browser, no sign-up required.",
-  url: "https://techsutra.online",
+    "Free online tools for images, PDFs, documents, video and audio. Compress, convert, merge, edit and extract text. Most tools run in your browser, with no sign-up required.",
+  url: "https://www.techsutra.online",
   contactEmail: "webtechavi0@gmail.com",
   ogImage: "/logo.png",
   nav: [

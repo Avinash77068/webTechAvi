@@ -63,9 +63,7 @@ export function Hero() {
           </div>
 
           <h1 className="mx-auto max-w-3xl text-[2.65rem] leading-[1.08] font-bold tracking-[-0.055em] text-balance text-foreground sm:text-5xl lg:mx-0 lg:text-[3.9rem]">
-            Free Online Tools.
-            <br />
-            <span className="hero-title-accent">Simple, Fast, Private.</span>
+            Free Online Tools for Images, PDFs, Documents &amp; Videos
           </h1>
 
           <p className="mx-auto mt-5 max-w-[39rem] text-base leading-7 text-muted-foreground sm:text-[1.05rem] lg:mx-0">

@@ -9,8 +9,9 @@ import { homeFaqs } from "@/lib/site-faqs";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata = createPageMetadata({
-  title: siteConfig.tagline,
-  description: siteConfig.description,
+  title: "Free Online Tools for Images, PDFs & Documents",
+  description:
+    "Compress images, merge PDFs, convert documents and extract text with free online tools. Most run in your browser, with no sign-up required.",
   path: "/",
   keywords: ["free online tools", "image compressor", "pdf tools", "document editor"],
 });

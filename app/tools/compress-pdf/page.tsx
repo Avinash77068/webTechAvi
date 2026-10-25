@@ -6,8 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("compress-pdf")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
-  description: tool.shortDescription,
+  title: "Compress PDF Online – Reduce PDF File Size",
+  description:
+    "Compress PDF files online to reduce their size. Adjust image quality, preview the estimated result and download the smaller PDF.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });
