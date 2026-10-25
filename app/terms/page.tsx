@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Use",
   description: `The terms for using ${siteConfig.name}.`,
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+  keywords: ["TechSutra terms of use", "online tools terms"],
+});
 
 export default function TermsPage() {
   return (

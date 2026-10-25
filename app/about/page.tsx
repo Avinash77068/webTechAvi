@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About",
   description: `Why ${siteConfig.name} exists and how it's built.`,
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+  keywords: ["about TechSutra", "free online tools"],
+});
 
 export default function AboutPage() {
   return (

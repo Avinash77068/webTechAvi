@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy",
   description: `How ${siteConfig.name} handles your files and data.`,
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+  keywords: ["TechSutra privacy policy", "online file privacy"],
+});
 
 export default function PrivacyPage() {
   return (

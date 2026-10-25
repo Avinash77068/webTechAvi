@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { Suspense } from "react";
 import { ToolsDirectoryClient } from "./tools-directory-client";
 import { getAvailableTools } from "@/lib/tools-registry";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "All Tools",
   description: "Browse every TechSutra tool for images, PDFs, documents, video and audio.",
-  alternates: { canonical: "/tools" },
-};
+  path: "/tools",
+  keywords: ["online tools", "image tools", "pdf tools", "document tools"],
+});
 
 export default function ToolsDirectoryPage() {
   const toolCount = getAvailableTools().length;

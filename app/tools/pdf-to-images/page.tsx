@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { PdfToImagesTool } from "@/features/pdf-to-images";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("pdf-to-images")!;
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: tool.name,
   description: tool.shortDescription,
-  alternates: { canonical: `/tools/${tool.slug}` },
-};
+  path: `/tools/${tool.slug}`,
+  keywords: tool.keywords,
+});
 
 export default function PdfToImagesPage() {
   return (

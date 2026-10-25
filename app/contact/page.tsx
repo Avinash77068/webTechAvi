@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { Mail } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
   description: `Get in touch with the ${siteConfig.name} team.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+  keywords: ["contact TechSutra", "TechSutra support"],
+});
 
 export default function ContactPage() {
   return (

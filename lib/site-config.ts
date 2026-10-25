@@ -5,7 +5,7 @@ export const siteConfig = {
     "Free online tools for images, PDFs, documents, video and audio. Compress, convert, merge, edit and extract text — all processed in your browser, no sign-up required.",
   url: "https://techsutra.online",
   contactEmail: "webtechavi0@gmail.com",
-  ogImage: "/og-image.png",
+  ogImage: "/logo.png",
   nav: [
     { label: "Image Tools", href: "/tools?category=image" },
     { label: "PDF Tools", href: "/tools?category=pdf" },

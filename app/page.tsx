@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { Hero } from "@/components/home/hero";
 import { PopularTools } from "@/components/home/popular-tools";
 import { CategorySections } from "@/components/home/category-sections";
@@ -8,11 +8,12 @@ import { AdSlot } from "@/components/ads/ad-slot";
 import { homeFaqs } from "@/lib/site-faqs";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+export const metadata = createPageMetadata({
+  title: siteConfig.tagline,
   description: siteConfig.description,
-  alternates: { canonical: "/" },
-};
+  path: "/",
+  keywords: ["free online tools", "image compressor", "pdf tools", "document editor"],
+});
 
 export default function HomePage() {
   return (

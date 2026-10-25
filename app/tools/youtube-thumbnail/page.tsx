@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { YoutubeThumbnailTool } from "@/features/youtube-thumbnail";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("youtube-thumbnail")!;
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: tool.name,
   description: tool.shortDescription,
-  alternates: { canonical: `/tools/${tool.slug}` },
-};
+  path: `/tools/${tool.slug}`,
+  keywords: tool.keywords,
+});
 
 export default function YoutubeThumbnailPage() {
   return (
