@@ -50,18 +50,26 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold text-foreground">Local storage and cookies</h2>
           <p className="mt-3">
             We use your browser's local storage for small preferences, such as your light/dark
-            theme choice and, once advertising is active, your ad-consent choice. These never
-            contain your file contents.
+            theme choice and your Google AdSense consent choice. These never contain your file
+            contents.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-foreground">Advertising</h2>
           <p className="mt-3">
-            {siteConfig.name} is funded by advertising. Advertising is currently disabled while
-            we finalize a provider and the required approvals. Once enabled, this page will be
-            updated to name the provider, describe what data it processes, and link to its own
-            privacy policy, along with a consent control for personalized ads.
+            {siteConfig.name} uses Google AdSense to display ads. Google may use cookies or
+            similar technologies to select and measure ads. You can allow personalized ads or
+            choose non-personalized ads using the consent message. Learn more in the{" "}
+            <a
+              href="https://policies.google.com/technologies/ads"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              Google Ads Privacy &amp; Terms
+            </a>
+            .
           </p>
         </section>
 

@@ -90,6 +90,7 @@ export function ToolPageLayout({
           <div className="mt-14 space-y-10">
             {instructions}
             <FaqSection faqs={tool.faqs} />
+            <AdSlot placement="between-content" className="max-w-4xl" />
             <RelatedTools tools={related} />
           </div>
         </div>
@@ -133,6 +134,7 @@ export function ToolPageLayout({
       <div className="mt-14 space-y-10">
         {instructions}
         <FaqSection faqs={tool.faqs} />
+        <AdSlot placement="between-content" className="max-w-4xl" />
         <RelatedTools tools={related} />
       </div>
     </div>

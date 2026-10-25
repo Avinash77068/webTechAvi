@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AdConsent } from "@/components/ads/ad-consent";
+import { InstallPrompt } from "@/components/pwa/install-prompt";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
 
@@ -55,6 +56,11 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
+  },
+  appleWebApp: {
+    capable: true,
+    title: siteConfig.name,
+    statusBarStyle: "default",
   },
   robots: { index: true, follow: true },
   icons: {
@@ -105,6 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Footer />
             <AdConsent />
             <Toaster position="bottom-right" />
+            <InstallPrompt />
           </TooltipProvider>
         </ThemeProvider>
       </body>
