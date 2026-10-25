@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { Brand } from "@/components/layout/brand";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { NavDropdownCloser } from "@/components/layout/nav-dropdown-closer";
 import { SearchBar } from "@/components/layout/search-bar";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import {
@@ -31,7 +32,8 @@ export function Header() {
       <div className="mx-auto flex h-[4.35rem] max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Brand />
 
-        <nav aria-label="Tool categories" className="hidden items-center gap-0.5 xl:flex">
+        <nav aria-label="Tool categories" data-nav-dropdowns className="hidden items-center gap-0.5 xl:flex">
+          <NavDropdownCloser />
           {categoryGroups.map((category) => (
             <details key={category.slug} className="group relative">
               <summary className="flex cursor-pointer list-none items-center gap-1 rounded-lg px-2.5 py-2 text-xs font-semibold text-foreground/85 transition-colors hover:bg-accent hover:text-foreground">
