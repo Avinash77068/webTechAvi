@@ -14,7 +14,7 @@ import { AdPlaceholder } from "@/components/ads/ad-placeholder";
 export function AdSlot({ placement, className }: { placement: AdPlacement; className?: string }) {
   const adConfig = adPlacementConfig[placement];
   const consent = useAdConsent();
-  const adRef = useRef<HTMLElement>(null);
+  const adRef = useRef<HTMLModElement>(null);
   const initialized = useRef(false);
 
   useEffect(() => {
