@@ -94,3 +94,62 @@ export function calculateResize(
     height: Math.max(1, Math.round(height ?? oh)),
   };
 }
+
+/**
+ * Encodes a lossy format (JPEG or WebP) at the best quality that stays within `maxBytes`.
+ * Binary-searches quality between 0.3 and `maxQuality`; if even 0.3 is too big the picture
+ * is shrunk by 15% and tried again (unless `allowShrink` is false, for exact pixel sizes: then
+ * the lowest-quality blob comes back with `fits: false`). Returns the blob and the canvas it
+ * was encoded from.
+ */
+export async function encodeUnderLimit(
+  canvas: HTMLCanvasElement,
+  format: Exclude<OutputImageFormat, "png">,
+  maxQuality: number,
+  maxBytes: number,
+  allowShrink = true
+): Promise<{ blob: Blob; canvas: HTMLCanvasElement; fits: boolean }> {
+  let current = canvas;
+  for (let round = 0; round < 8; round++) {
+    const floor = await canvasToBlob(current, format, 0.3);
+    if (floor.size <= maxBytes) {
+      let best = floor;
+      let lo = 0.3;
+      let hi = Math.min(0.95, maxQuality);
+      for (let i = 0; i < 6; i++) {
+        const mid = (lo + hi) / 2;
+        const blob = await canvasToBlob(current, format, mid);
+        if (blob.size <= maxBytes) {
+          best = blob;
+          lo = mid;
+        } else {
+          hi = mid;
+        }
+      }
+      return { blob: best, canvas: current, fits: true };
+    }
+    if (!allowShrink) return { blob: floor, canvas: current, fits: false };
+    const next = document.createElement("canvas");
+    next.width = Math.max(1, Math.round(current.width * 0.85));
+    next.height = Math.max(1, Math.round(current.height * 0.85));
+    const ctx = next.getContext("2d");
+    if (!ctx) throw new Error("Canvas is not supported in this browser.");
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(current, 0, 0, next.width, next.height);
+    current = next;
+  }
+  return { blob: await canvasToBlob(current, format, 0.3), canvas: current, fits: false };
+}
+
+/** Copy of `source` flattened onto a white background (JPEG has no transparency). */
+export function flattenOnWhite(source: HTMLCanvasElement): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = source.width;
+  canvas.height = source.height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas is not supported in this browser.");
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(source, 0, 0);
+  return canvas;
+}

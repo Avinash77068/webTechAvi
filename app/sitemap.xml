@@ -66,6 +66,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.techsutra.online/tools/photo-editor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.techsutra.online/tools/signature-maker</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.techsutra.online/tools/image-resizer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

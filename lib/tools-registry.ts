@@ -13,10 +13,12 @@ import {
   Images,
   Maximize2,
   Minimize2,
+  PenLine,
   PenTool,
   RefreshCw,
   ScanText,
   Scissors,
+  SlidersHorizontal,
   SplitSquareHorizontal,
   Table,
   Type,
@@ -224,6 +226,84 @@ export const tools: ToolDefinition[] = [
       },
     ],
     relatedSlugs: ["image-to-pdf", "image-cropper"],
+    popular: true,
+  },
+  {
+    slug: "photo-editor",
+    name: "Photo Editor",
+    shortDescription: "Crop, rotate, fix the light and whiten the background.",
+    description:
+      "Crop to a passport or any other shape, rotate and flip, fix dark or dull light, turn a grey wall white and save as JPEG, PNG or WebP, even under a KB limit. Everything runs in your browser.",
+    category: "image",
+    icon: SlidersHorizontal,
+    status: "available",
+    acceptedFormats: ["JPEG", "PNG", "WebP"],
+    maxFileSizeMB: 25,
+    keywords: ["photo editor", "edit photo online", "white background photo", "passport photo crop", "brighten photo"],
+    privacyNote: "Editing happens locally in your browser. Nothing is uploaded.",
+    faqs: [
+      {
+        question: "How do I make the background of my photo white?",
+        answer:
+          "Turn up \"Whiten the background\". It pushes light, grey or cream areas to pure white and leaves skin and hair alone. Keep it low at first, because a high value can wash out a light shirt. For a coloured or busy wall, retake the photo against a plain light wall.",
+      },
+      {
+        question: "Can I crop to the 3.5 \u00d7 4.5 cm passport shape?",
+        answer: "Yes. Pick \"Passport 7:9\", which is the same shape as 3.5 \u00d7 4.5 cm. The exported size is in pixels of your original photo.",
+      },
+      {
+        question: "How do I save the photo under 50 KB?",
+        answer:
+          "Choose JPEG or WebP, turn on \"Keep under a size limit\" and enter the maximum. The editor finds the best quality that stays under it, and shrinks the picture only when quality alone is not enough.",
+      },
+      {
+        question: "Is my photo uploaded anywhere?",
+        answer: "No. Cropping, light changes and saving all run in your browser. Close the tab and nothing is kept.",
+      },
+    ],
+    relatedSlugs: ["image-cropper", "image-resizer", "image-compressor"],
+    popular: true,
+  },
+  {
+    slug: "signature-maker",
+    name: "Signature Maker",
+    shortDescription: "Draw, type or scan a clean signature with a transparent background.",
+    description:
+      "Make a clean signature without paper: draw it with a finger or mouse, type your name in a handwriting style, or turn a photo of your signature into ink on a transparent background. Save a transparent PNG, or a white JPG at an exact size under a KB limit.",
+    category: "image",
+    icon: PenLine,
+    status: "available",
+    acceptedFormats: ["JPEG", "PNG", "WebP"],
+    maxFileSizeMB: 25,
+    keywords: ["signature maker", "draw signature", "transparent signature", "signature png", "e-signature online", "signature resize"],
+    privacyNote: "Your signature is made locally in your browser. Nothing is uploaded.",
+    faqs: [
+      {
+        question: "How do I make a signature with a transparent background?",
+        answer:
+          "Choose \"Transparent PNG\". A drawing, a typed name or a cleaned photo is saved with no background, so you can place it on a PDF or a Word file without a white box around it.",
+      },
+      {
+        question: "How do I turn a photo of my signature into a clean one?",
+        answer:
+          "Choose \"From a photo\" and add a picture of your signature on white paper. The paper is removed and the ink is kept. If thin lines disappear, lower \"Remove paper\"; if grey paper stays, raise it.",
+      },
+      {
+        question: "Will a form accept a typed signature?",
+        answer:
+          "Most exam and government forms want your own handwritten signature, not a typed name. Use Type for documents that allow it, and draw or photograph your real signature for forms.",
+      },
+      {
+        question: "How do I get an exact size like 140 \u00d7 60 px under 20 KB?",
+        answer:
+          "Choose \"Exact size JPG\", pick a preset or type the width, height and maximum KB from your notice. The signature is placed on white at that size and compressed to fit. Always check the size in your own notice.",
+      },
+      {
+        question: "Is my signature uploaded?",
+        answer: "No. Drawing, cleaning and saving all run in your browser.",
+      },
+    ],
+    relatedSlugs: ["pdf-editor", "image-resizer", "image-compressor"],
     popular: true,
   },
   {
