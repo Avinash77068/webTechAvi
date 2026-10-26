@@ -10,8 +10,7 @@ import { AdConsent } from "@/components/ads/ad-consent";
 import { InstallPrompt } from "@/components/pwa/install-prompt";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
-
-export const dynamic = "force-dynamic";
+import { JsonLd } from "@/components/seo/json-ld";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -68,6 +67,28 @@ export const metadata: Metadata = {
   },
 };
 
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: `${siteConfig.url}/logo.png`,
+      email: siteConfig.contactEmail,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -75,6 +96,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <body
+        className="flex min-h-screen flex-col antialiased"
+        suppressHydrationWarning
+      >
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-VR3HJE41CZ"
         strategy="lazyOnload"
@@ -87,10 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             gtag('config', 'G-VR3HJE41CZ');
           `}
       </Script>
-      <body
-        className="flex min-h-screen flex-col antialiased"
-        suppressHydrationWarning
-      >
+        <JsonLd data={siteJsonLd} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

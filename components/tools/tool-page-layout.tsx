@@ -4,6 +4,8 @@ import { Breadcrumbs } from "@/components/tools/breadcrumbs";
 import { PrivacyNote } from "@/components/tools/privacy-note";
 import { FaqSection } from "@/components/tools/faq-section";
 import { RelatedTools } from "@/components/tools/related-tools";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/lib/site-config";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { categoryMeta, getRelatedTools, type ToolDefinition } from "@/lib/tools-registry";
 
@@ -19,27 +21,70 @@ export function ToolPageLayout({
   hero?: boolean;
 }) {
   const related = getRelatedTools(tool);
+  const toolUrl = `${siteConfig.url}/tools/${tool.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: categoryMeta[tool.category].label,
+            item: `${siteConfig.url}/tools/category/${tool.category}`,
+          },
+          { "@type": "ListItem", position: 3, name: tool.name, item: toolUrl },
+        ],
+      },
+      {
+        "@type": "WebApplication",
+        name: tool.name,
+        url: toolUrl,
+        description: tool.description,
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Any (web browser)",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        publisher: { "@id": `${siteConfig.url}/#organization` },
+      },
+      ...(tool.faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: tool.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: { "@type": "Answer", text: faq.answer },
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
 
   if (hero) {
     const Icon = tool.icon;
     return (
       <div>
+        <JsonLd data={jsonLd} />
         <section className="hero-section">
           <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-14">
             <div className="text-center lg:text-left">
               <div className="flex justify-center lg:justify-start">
                 <Breadcrumbs
                   items={[
-                    { label: categoryMeta[tool.category].label, href: `/tools?category=${tool.category}` },
+                    { label: categoryMeta[tool.category].label, href: `/tools/category/${tool.category}` },
                     { label: tool.name },
                   ]}
                 />
               </div>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-                {tool.name}
-                <br />
-                <span className="hero-title-accent">Simple, Fast, Private.</span>
+                {tool.name} Online
               </h1>
+              <p className="hero-title-accent mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
+                Simple, Fast, Private.
+              </p>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg lg:mx-0">
                 {tool.description}
               </p>
@@ -63,7 +108,7 @@ export function ToolPageLayout({
                   <Icon className="size-6" aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold">{tool.name}</h2>
+                  <p className="text-xl font-semibold">{tool.name}</p>
                   <p className="text-sm text-muted-foreground">{tool.shortDescription}</p>
                 </div>
               </div>
@@ -99,9 +144,10 @@ export function ToolPageLayout({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 lg:px-8">
+      <JsonLd data={jsonLd} />
       <Breadcrumbs
         items={[
-          { label: categoryMeta[tool.category].label, href: `/tools?category=${tool.category}` },
+          { label: categoryMeta[tool.category].label, href: `/tools/category/${tool.category}` },
           { label: tool.name },
         ]}
       />

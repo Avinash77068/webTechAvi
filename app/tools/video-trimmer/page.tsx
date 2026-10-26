@@ -1,12 +1,12 @@
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { VideoTrimmerTool } from "@/features/video-trimmer";
-import { getToolBySlug } from "@/lib/tools-registry";
+import { getToolBySlug, getToolSeoTitle } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("video-trimmer")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
+  title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,

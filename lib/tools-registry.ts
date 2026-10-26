@@ -812,3 +812,27 @@ export function getRelatedTools(tool: ToolDefinition): ToolDefinition[] {
     .map((slug) => getToolBySlug(slug))
     .filter((t): t is ToolDefinition => !!t && t.status === "available");
 }
+
+const seoTitles: Record<string, string> = {
+  "audio-extractor": "Extract Audio from Video Online Free (MP3)",
+  "docx-editor": "Free Online DOCX Editor – Edit Word Files",
+  "image-resizer": "Resize Image Online Free – Pixels & Presets",
+  "organize-pdf": "Rotate & Reorder PDF Pages Online Free",
+  "csv-editor": "Free Online CSV Editor & Viewer",
+  "image-converter": "Convert JPG, PNG & WebP Online Free",
+  "image-cropper": "Crop Image Online Free – Custom & Preset Ratios",
+  "pdf-to-images": "Convert PDF to JPG or PNG Online Free",
+  "photo-editor": "Free Online Photo Editor – Brighten, Crop & Adjust",
+  "image-to-pdf": "Convert JPG & PNG to PDF Online Free",
+  "pdf-text-extractor": "Extract Text from PDF Online Free (with OCR)",
+  "pdf-editor": "Edit & Sign PDF Online Free",
+  "txt-editor": "Free Online Text Editor – Edit TXT Files",
+  "signature-maker": "Free Signature Maker – Transparent PNG",
+  "split-pdf": "Split PDF Online Free – Extract Pages",
+  "youtube-thumbnail": "YouTube Thumbnail Viewer & Downloader",
+  "video-trimmer": "Trim Video Online Free in Your Browser",
+};
+
+export function getToolSeoTitle(tool: ToolDefinition): string {
+  return seoTitles[tool.slug] ?? tool.name;
+}

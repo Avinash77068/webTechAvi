@@ -19,28 +19,28 @@ const toolkitCards = [
   {
     label: categoryMeta.image.label,
     description: "Compress, resize & convert images",
-    href: "/tools?category=image",
+    href: "/tools/category/image",
     icon: FileImage,
     iconClass: "tool-card-icon--image",
   },
   {
     label: categoryMeta.pdf.label,
     description: "Merge, split & organize PDFs",
-    href: "/tools?category=pdf",
+    href: "/tools/category/pdf",
     icon: FileText,
     iconClass: "tool-card-icon--pdf",
   },
   {
     label: categoryMeta.document.label,
     description: "Edit and convert documents",
-    href: "/tools?category=document",
+    href: "/tools/category/document",
     icon: ScanText,
     iconClass: "tool-card-icon--document",
   },
   {
     label: categoryMeta["video-audio"].label,
     description: "Trim video & extract audio",
-    href: "/tools?category=video-audio",
+    href: "/tools/category/video-audio",
     icon: Video,
     iconClass: "tool-card-icon--video-audio",
   },
@@ -78,7 +78,7 @@ export function Hero() {
             {Object.entries(categoryMeta).map(([slug, meta]) => (
               <Link
                 key={slug}
-                href={`/tools?category=${slug}`}
+                href={`/tools/category/${slug}`}
                 className="rounded-full border border-border bg-card/45 px-3.5 py-1.5 text-xs font-semibold text-foreground/85 transition-colors hover:border-primary/50 hover:bg-accent hover:text-foreground sm:text-sm"
               >
                 {meta.label}

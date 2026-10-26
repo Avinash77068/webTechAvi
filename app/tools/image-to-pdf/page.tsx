@@ -1,12 +1,12 @@
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { ImageToPdfTool } from "@/features/image-to-pdf";
-import { getToolBySlug } from "@/lib/tools-registry";
+import { getToolBySlug, getToolSeoTitle } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-to-pdf")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
+  title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,

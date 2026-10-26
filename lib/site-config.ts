@@ -7,15 +7,21 @@ export const siteConfig = {
   contactEmail: "webtechavi0@gmail.com",
   ogImage: "/logo.png",
   nav: [
-    { label: "Image Tools", href: "/tools?category=image" },
-    { label: "PDF Tools", href: "/tools?category=pdf" },
-    { label: "Document Tools", href: "/tools?category=document" },
-    { label: "Video & Audio", href: "/tools?category=video-audio" },
+    { label: "Image Tools", href: "/tools/category/image" },
+    { label: "PDF Tools", href: "/tools/category/pdf" },
+    { label: "Document Tools", href: "/tools/category/document" },
+    { label: "Video & Audio", href: "/tools/category/video-audio" },
   ],
   footerLinks: {
     product: [
       { label: "All Tools", href: "/tools" },
-      ],
+      { label: "Merge PDF", href: "/tools/merge-pdf" },
+      { label: "Compress PDF", href: "/tools/compress-pdf" },
+      { label: "Image Compressor", href: "/tools/image-compressor" },
+      { label: "Image to Text (OCR)", href: "/tools/image-to-text" },
+      { label: "Image to PDF", href: "/tools/image-to-pdf" },
+      { label: "Word to PDF", href: "/tools/word-to-pdf" },
+    ],
     company: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },

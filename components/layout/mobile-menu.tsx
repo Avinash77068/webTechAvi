@@ -48,7 +48,7 @@ export function MobileMenu({
             {categories.map((category) => (
               <div key={category.slug}>
                 <Link
-                  href={`/tools?category=${category.slug}`}
+                  href={`/tools/category/${category.slug}`}
                   className="mb-1 block px-3 py-1.5 text-xs font-bold uppercase tracking-[0.13em] text-primary"
                 >
                   {category.label}

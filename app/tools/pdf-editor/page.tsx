@@ -1,12 +1,12 @@
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { PdfEditorTool } from "@/features/pdf-editor";
-import { getToolBySlug } from "@/lib/tools-registry";
+import { getToolBySlug, getToolSeoTitle } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("pdf-editor")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
+  title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,

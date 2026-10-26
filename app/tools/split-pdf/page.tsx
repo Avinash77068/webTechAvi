@@ -1,12 +1,12 @@
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { SplitPdfTool } from "@/features/split-pdf";
-import { getToolBySlug } from "@/lib/tools-registry";
+import { getToolBySlug, getToolSeoTitle } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("split-pdf")!;
 
 export const metadata = createPageMetadata({
-  title: tool.name,
+  title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,

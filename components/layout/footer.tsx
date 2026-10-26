@@ -16,7 +16,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-foreground">Product</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-foreground">Popular tools</h2>
             <ul className="mt-3 space-y-2">
               {siteConfig.footerLinks.product.map((link) => (
                 <li key={link.href}>

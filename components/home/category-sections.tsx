@@ -36,7 +36,7 @@ export function CategorySections() {
                     </div>
                   </div>
                   <Link
-                    href={`/tools?category=${category}`}
+                    href={`/tools/category/${category}`}
                     className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-primary transition-colors hover:text-primary/80 sm:text-sm"
                   >
                     View all <ArrowRight className="size-4" aria-hidden="true" />
