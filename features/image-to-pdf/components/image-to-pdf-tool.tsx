@@ -68,6 +68,16 @@ export function ImageToPdfTool() {
     });
   }
 
+  function moveTo(index: number, target: number) {
+    setItems((prev) => {
+      if (target === index || target < 0 || target >= prev.length) return prev;
+      const next = [...prev];
+      const [moved] = next.splice(index, 1);
+      next.splice(target, 0, moved);
+      return next;
+    });
+  }
+
   function removeItem(id: string) {
     setItems((prev) => {
       const item = prev.find((i) => i.id === id);
@@ -181,10 +191,34 @@ export function ImageToPdfTool() {
             </div>
           </div>
 
+          {items.length > 1 && (
+            <p className="text-xs text-muted-foreground">
+              Tip: click a page number to move that image straight to another position.
+            </p>
+          )}
+
           <ul className="space-y-2">
             {items.map((item, index) => (
               <li key={item.id} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
-                <span className="w-6 shrink-0 text-center text-sm text-muted-foreground">{index + 1}</span>
+                <Select
+                  value={String(index + 1)}
+                  onValueChange={(value) => moveTo(index, Number(value) - 1)}
+                >
+                  <SelectTrigger
+                    aria-label={`Page ${index + 1}: change position of ${item.file.name}`}
+                    title="Click to move this image to another page number"
+                    className="h-8 min-w-14 shrink-0 justify-center gap-1 rounded-full border-primary/40 bg-primary/10 px-2 font-semibold text-primary"
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {items.map((_, position) => (
+                      <SelectItem key={position} value={String(position + 1)}>
+                        {position + 1}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.previewUrl} alt="" className="size-14 shrink-0 rounded-lg object-cover" />
                 <div className="min-w-0 flex-1">
