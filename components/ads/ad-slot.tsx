@@ -8,25 +8,22 @@ import {
   adPlacementConfig,
   type AdPlacement,
 } from "@/lib/ads-config";
-import { useAdConsent } from "@/lib/ad-consent";
 import { AdPlaceholder } from "@/components/ads/ad-placeholder";
 
 export function AdSlot({ placement, className }: { placement: AdPlacement; className?: string }) {
   const adConfig = adPlacementConfig[placement];
-  const consent = useAdConsent();
   const adRef = useRef<HTMLModElement>(null);
   const initialized = useRef(false);
 
   useEffect(() => {
-    if (!adsEnabled || consent === null || !adRef.current || initialized.current) return;
+    if (!adsEnabled || !adRef.current || initialized.current) return;
 
     const adsbygoogle = (window.adsbygoogle = window.adsbygoogle || []);
-    adsbygoogle.requestNonPersonalizedAds = consent === "rejected" ? 1 : 0;
     adsbygoogle.push({});
     initialized.current = true;
-  }, [consent]);
+  }, []);
 
-  if (!adsEnabled || consent === null) {
+  if (!adsEnabled) {
     if (process.env.NEXT_PUBLIC_SHOW_AD_PLACEHOLDERS === "true") {
       return (
         <div className={className}>

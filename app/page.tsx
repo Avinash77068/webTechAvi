@@ -6,7 +6,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { FaqSection } from "@/components/tools/faq-section";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { homeFaqs } from "@/lib/site-faqs";
-import { siteConfig } from "@/lib/site-config";
+
 
 export const metadata = createPageMetadata({
   title: "Free Online Tools for Images, PDFs & Documents",

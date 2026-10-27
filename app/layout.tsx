@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { AdConsent } from "@/components/ads/ad-consent";
 import { InstallPrompt } from "@/components/pwa/install-prompt";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
@@ -96,6 +95,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-8212836769232178" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8212836769232178"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body
         className="flex min-h-screen flex-col antialiased"
         suppressHydrationWarning
@@ -131,7 +138,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               {children}
             </main>
             <Footer />
-            <AdConsent />
             <Toaster position="bottom-right" />
             <InstallPrompt />
           </TooltipProvider>

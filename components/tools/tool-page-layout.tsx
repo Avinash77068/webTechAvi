@@ -6,7 +6,6 @@ import { FaqSection } from "@/components/tools/faq-section";
 import { RelatedTools } from "@/components/tools/related-tools";
 import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/lib/site-config";
-import { AdSlot } from "@/components/ads/ad-slot";
 import { categoryMeta, getRelatedTools, type ToolDefinition } from "@/lib/tools-registry";
 
 export function ToolPageLayout({
@@ -129,9 +128,6 @@ export function ToolPageLayout({
 
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-[0_20px_64px_rgba(0,0,0,0.18)] sm:p-6">{children}</div>
-          <div className="mt-4">
-            <AdSlot placement="tool-sidebar" />
-          </div>
           <div className="mt-14 space-y-10">
             {instructions}
             <FaqSection faqs={tool.faqs} />
@@ -171,8 +167,6 @@ export function ToolPageLayout({
               <p className="mt-1 text-muted-foreground">Max file size: {tool.maxFileSizeMB} MB per file</p>
             )}
           </div>
-
-          <AdSlot placement="tool-sidebar" />
         </aside>
       </div>
 

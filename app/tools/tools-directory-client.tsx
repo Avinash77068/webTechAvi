@@ -6,9 +6,8 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { categoryMeta, tools, type ToolCategory, type ToolDefinition } from "@/lib/tools-registry";
+import { categoryMeta, tools, type ToolCategory } from "@/lib/tools-registry";
 import { ToolCard } from "@/components/tools/tool-card";
-import { AdSlot } from "@/components/ads/ad-slot";
 
 const categories: { value: ToolCategory | "all"; label: string }[] = [
   { value: "all", label: "All tools" },
@@ -18,7 +17,6 @@ const categories: { value: ToolCategory | "all"; label: string }[] = [
   })) satisfies { value: ToolCategory; label: string }[]),
 ];
 
-type FeedItem = { type: "tool"; tool: ToolDefinition } | { type: "ad" };
 
 export function ToolsDirectoryClient() {
   const router = useRouter();
@@ -46,17 +44,6 @@ export function ToolsDirectoryClient() {
       return haystack.includes(q);
     });
   }, [activeCategory, query]);
-
-  const feedItems = useMemo<FeedItem[]>(() => {
-    const items: FeedItem[] = [];
-
-    filteredTools.forEach((tool, index) => {
-      items.push({ type: "tool", tool });
-      if (index === 5 && filteredTools.length > 6) items.push({ type: "ad" });
-    });
-
-    return items;
-  }, [filteredTools]);
 
   return (
     <div>
@@ -113,13 +100,9 @@ export function ToolsDirectoryClient() {
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {feedItems.map((item) =>
-          item.type === "ad" ? (
-            <AdSlot key="tools-directory-infeed-ad" placement="between-content" />
-          ) : (
-            <ToolCard key={item.tool.slug} tool={item.tool} />
-          ),
-        )}
+        {filteredTools.map((tool) => (
+          <ToolCard key={tool.slug} tool={tool} />
+        ))}
       </div>
 
       {filteredTools.length === 0 && (
