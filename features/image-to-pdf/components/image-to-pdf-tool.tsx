@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUp, FileText, Plus, X } from "lucide-react";
+import { ArrowDown, ArrowUp, FileText, Plus, RotateCcw, RotateCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
@@ -26,6 +26,8 @@ interface ImageItem {
   id: string;
   file: File;
   previewUrl: string;
+  /** Clockwise, always 0, 90, 180 or 270. */
+  rotation: number;
 }
 
 export function ImageToPdfTool() {
@@ -54,6 +56,7 @@ export function ImageToPdfTool() {
       id: `${file.name}-${file.size}-${crypto.randomUUID()}`,
       file,
       previewUrl: URL.createObjectURL(file),
+      rotation: 0,
     }));
     setItems((prev) => [...prev, ...newItems]);
   }
@@ -78,6 +81,15 @@ export function ImageToPdfTool() {
     });
   }
 
+  /** Rotates one image, or every image when `id` is omitted. */
+  function rotate(direction: 1 | -1, id?: string) {
+    setItems((prev) =>
+      prev.map((i) =>
+        !id || i.id === id ? { ...i, rotation: (i.rotation + direction * 90 + 360) % 360 } : i
+      )
+    );
+  }
+
   function removeItem(id: string) {
     setItems((prev) => {
       const item = prev.find((i) => i.id === id);
@@ -96,7 +108,7 @@ export function ImageToPdfTool() {
     try {
       const normalized = [];
       for (const item of items) {
-        normalized.push(await normalizeImageForPdf(item.file));
+        normalized.push(await normalizeImageForPdf(item.file, item.rotation));
       }
       const pdfBytes = await buildPdfFromImages(normalized, { pageSize, orientation });
       const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
@@ -191,11 +203,24 @@ export function ImageToPdfTool() {
             </div>
           </div>
 
-          {items.length > 1 && (
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs text-muted-foreground">
-              Tip: click a page number to move that image straight to another position.
+              {items.length > 1
+                ? "Tip: click a page number to move that image to another position, and use the rotate buttons to turn any photo."
+                : "Use the rotate buttons to turn the photo before creating the PDF."}
             </p>
-          )}
+            {items.length > 1 && (
+              <div className="flex items-center gap-1">
+                <span className="mr-1 text-xs font-medium">Rotate all</span>
+                <Button type="button" size="icon-sm" variant="outline" aria-label="Rotate all left" onClick={() => rotate(-1)}>
+                  <RotateCcw className="size-3.5" aria-hidden="true" />
+                </Button>
+                <Button type="button" size="icon-sm" variant="outline" aria-label="Rotate all right" onClick={() => rotate(1)}>
+                  <RotateCw className="size-3.5" aria-hidden="true" />
+                </Button>
+              </div>
+            )}
+          </div>
 
           <ul className="space-y-2">
             {items.map((item, index) => (
@@ -220,12 +245,38 @@ export function ImageToPdfTool() {
                   </SelectContent>
                 </Select>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.previewUrl} alt="" className="size-14 shrink-0 rounded-lg object-cover" />
+                <img
+                  src={item.previewUrl}
+                  alt=""
+                  className="size-14 shrink-0 rounded-lg object-cover transition-transform duration-200"
+                  style={item.rotation ? { transform: `rotate(${item.rotation}deg)` } : undefined}
+                />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{item.file.name}</p>
-                  <p className="text-xs text-muted-foreground">{formatBytes(item.file.size)}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {formatBytes(item.file.size)}
+                    {item.rotation !== 0 && <span className="text-primary"> · Rotated {item.rotation}°</span>}
+                  </p>
                 </div>
-                <div className="flex shrink-0 items-center gap-1">
+                <div className="flex shrink-0 flex-wrap items-center justify-end gap-1">
+                  <Button
+                    type="button"
+                    size="icon-sm"
+                    variant="outline"
+                    aria-label="Rotate left"
+                    onClick={() => rotate(-1, item.id)}
+                  >
+                    <RotateCcw className="size-3.5" aria-hidden="true" />
+                  </Button>
+                  <Button
+                    type="button"
+                    size="icon-sm"
+                    variant="outline"
+                    aria-label="Rotate right"
+                    onClick={() => rotate(1, item.id)}
+                  >
+                    <RotateCw className="size-3.5" aria-hidden="true" />
+                  </Button>
                   <Button
                     type="button"
                     size="icon-sm"

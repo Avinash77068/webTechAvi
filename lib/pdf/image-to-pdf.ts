@@ -19,13 +19,18 @@ export interface ImageToPdfOptions {
 
 const PAGE_MARGIN_DEFAULT = 24;
 
-/**
- * pdf-lib can only embed JPEG and PNG. JPEG/PNG inputs pass through untouched to avoid
- * re-encoding loss; anything else (e.g. WebP) is re-encoded to PNG via canvas.
- */
-export async function normalizeImageForPdf(file: File): Promise<NormalizedImageInput> {
+
+export async function normalizeImageForPdf(file: File, rotationDeg = 0): Promise<NormalizedImageInput> {
   const sniffed = await sniffImageType(file);
   const bitmap = await loadImageBitmap(file);
+  const rotation = ((rotationDeg % 360) + 360) % 360;
+
+  if (rotation !== 0) {
+    const canvas = drawBitmapToCanvas(bitmap, bitmap.width, bitmap.height, rotation);
+    const kind = sniffed === "jpeg" ? "jpeg" : "png";
+    const blob = await canvasToBlob(canvas, kind, 0.92);
+    return { bytes: await blob.arrayBuffer(), kind, width: canvas.width, height: canvas.height };
+  }
 
   if (sniffed === "jpeg" || sniffed === "png") {
     return {
