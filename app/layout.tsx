@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/footer";
 import { InstallPrompt } from "@/components/pwa/install-prompt";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
+import { WebVitals } from "@/components/analytics/web-vitals";
 import { JsonLd } from "@/components/seo/json-ld";
 
 const geistSans = Geist({
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             gtag('config', 'G-VR3HJE41CZ');
           `}
       </Script>
+        <WebVitals />
         <JsonLd data={siteJsonLd} />
         <ThemeProvider
           attribute="class"
