@@ -153,3 +153,27 @@ export function flattenOnWhite(source: HTMLCanvasElement): HTMLCanvasElement {
   ctx.drawImage(source, 0, 0);
   return canvas;
 }
+
+const mimeToFormat: Record<string, OutputImageFormat> = {
+  "image/jpeg": "jpeg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
+
+/** The output format a blob is already encoded in (JPEG when unknown). */
+export function blobFormat(blob: Blob): OutputImageFormat {
+  return mimeToFormat[blob.type] ?? "jpeg";
+}
+
+/** Re-encodes an image blob in another format; returns it untouched when it already matches. */
+export async function convertImageBlob(
+  blob: Blob,
+  format: OutputImageFormat,
+  quality = 0.92
+): Promise<Blob> {
+  if (blobFormat(blob) === format && blob.type) return blob;
+  const bitmap = await loadImageBitmap(blob);
+  const canvas = drawBitmapToCanvas(bitmap, bitmap.width, bitmap.height);
+  bitmap.close();
+  return canvasToBlob(format === "jpeg" ? flattenOnWhite(canvas) : canvas, format, quality);
+}

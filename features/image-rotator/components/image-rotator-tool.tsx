@@ -8,13 +8,12 @@ import { Label } from "@/components/ui/label";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ErrorBanner } from "@/components/tools/error-banner";
 import { formatBytes, sniffImageType, stripExtension } from "@/lib/validation";
-import { downloadBlob } from "@/lib/download";
 import {
-  canvasToBlob,
-  loadImageBitmap,
-  formatToExtension,
-  type OutputImageFormat,
-} from "@/lib/image/canvas-utils";
+  BulkDownloadPanel,
+  downloadImage,
+  type DownloadFormat,
+} from "@/components/tools/bulk-download-panel";
+import { canvasToBlob, loadImageBitmap, type OutputImageFormat } from "@/lib/image/canvas-utils";
 import { getToolBySlug } from "@/lib/tools-registry";
 
 const tool = getToolBySlug("image-rotator")!;
@@ -29,7 +28,6 @@ interface RotateItem {
   status: "pending" | "processing" | "done" | "error";
   resultBlob?: Blob;
   resultUrl?: string;
-  resultFormat?: OutputImageFormat;
   appliedAngle?: number;
   error?: string;
 }
@@ -69,6 +67,7 @@ export function ImageRotatorTool() {
   const [angleInput, setAngleInput] = useState("90");
   const [rejectedErrors, setRejectedErrors] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [downloadFormat, setDownloadFormat] = useState<DownloadFormat>("keep");
   const itemsRef = useRef<RotateItem[]>([]);
 
   useEffect(() => {
@@ -140,7 +139,6 @@ export function ImageRotatorTool() {
               status: "done",
               resultBlob: blob,
               resultUrl,
-              resultFormat: outputFormat,
               appliedAngle: rotation,
             };
           })
@@ -164,30 +162,8 @@ export function ImageRotatorTool() {
     return item.status === "done" && !!item.resultUrl && (!item.selected || item.appliedAngle === angle);
   }
 
-  function resultFilename(item: RotateItem) {
-    const ext = formatToExtension[item.resultFormat ?? "jpeg"];
-    return `${stripExtension(item.file.name)}-rotated.${ext}`;
-  }
-
-  function downloadItem(item: RotateItem) {
-    if (!item.resultBlob) return;
-    downloadBlob(item.resultBlob, resultFilename(item));
-  }
-
-  async function downloadAllAsZip() {
-    const JSZip = (await import("jszip")).default;
-    const zip = new JSZip();
-    const used = new Set<string>();
-    for (const item of doneItems) {
-      let name = resultFilename(item);
-      for (let n = 2; used.has(name); n++) {
-        name = resultFilename(item).replace(/(\.[^.]+)$/, `-${n}$1`);
-      }
-      used.add(name);
-      zip.file(name, item.resultBlob!);
-    }
-    const zipBlob = await zip.generateAsync({ type: "blob" });
-    downloadBlob(zipBlob, "rotated-images.zip");
+  function resultImage(item: RotateItem) {
+    return { baseName: `${stripExtension(item.file.name)}-rotated`, blob: item.resultBlob! };
   }
 
   function removeItem(id: string) {
@@ -288,11 +264,6 @@ export function ImageRotatorTool() {
             >
               {isProcessing ? "Rotating…" : `Rotate ${selectedCount} selected`}
             </Button>
-            {doneItems.length > 1 && (
-              <Button type="button" variant="secondary" onClick={downloadAllAsZip} disabled={isProcessing}>
-                Download all ({doneItems.length}) as ZIP
-              </Button>
-            )}
             <Button
               type="button"
               variant="ghost"
@@ -349,7 +320,7 @@ export function ImageRotatorTool() {
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
                     {item.status === "done" && (
-                      <Button type="button" size="sm" onClick={() => downloadItem(item)}>
+                      <Button type="button" size="sm" onClick={() => downloadImage(resultImage(item), downloadFormat)}>
                         Download
                       </Button>
                     )}
@@ -367,6 +338,17 @@ export function ImageRotatorTool() {
               </li>
             ))}
           </ul>
+
+          {!isProcessing && (
+            <BulkDownloadPanel
+              images={doneItems.map(resultImage)}
+              totalCount={items.length}
+              format={downloadFormat}
+              onFormatChange={setDownloadFormat}
+              zipName="rotated-images.zip"
+              onReset={reset}
+            />
+          )}
         </>
       )}
 

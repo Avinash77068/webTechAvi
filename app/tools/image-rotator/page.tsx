@@ -26,7 +26,7 @@ export default function ImageRotatorPage() {
             <li>Drag and drop one or more JPG, PNG or WebP images, or click to browse.</li>
             <li>Tick the images you want to rotate (all are selected by default).</li>
             <li>Enter the rotation angle in degrees or pick a preset like 90°, 180° or 270°.</li>
-            <li>Click "Rotate selected", then download each image or all of them as a ZIP.</li>
+            <li>Click "Rotate selected", choose the download type and download all images as a ZIP.</li>
           </ol>
         </section>
       }

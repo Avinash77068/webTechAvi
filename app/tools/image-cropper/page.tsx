@@ -22,10 +22,13 @@ export default function ImageCropperPage() {
             How to use the Image Cropper
           </h2>
           <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-muted-foreground">
-            <li>Upload a JPG, PNG or WebP image.</li>
+            <li>Upload one or more JPG, PNG or WebP images.</li>
             <li>Pick an aspect ratio, or leave it free-form and drag the crop handles.</li>
-            <li>Rotate the image if needed, then click "Crop image".</li>
-            <li>Download the cropped result.</li>
+            <li>
+              Keep "Apply to all images" on to crop and rotate every image at once, or turn it off to
+              edit each image separately.
+            </li>
+            <li>Click "Crop", choose the download type and download all images as a ZIP.</li>
           </ol>
         </section>
       }

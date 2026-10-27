@@ -172,15 +172,15 @@ export const tools: ToolDefinition[] = [
   {
     slug: "image-cropper",
     name: "Image Cropper",
-    shortDescription: "Crop, rotate and straighten your images.",
+    shortDescription: "Crop and rotate one or many images at once.",
     description:
-      "Select the exact area you want to keep using interactive crop handles, choose a common aspect ratio, rotate the image, and export the cropped result.",
+      "Select the exact area you want to keep using interactive crop handles, choose a common aspect ratio and rotate your images. Crop several images in one go and download them all as a ZIP in JPEG, PNG or WebP.",
     category: "image",
     icon: Crop,
     status: "available",
     acceptedFormats: ["JPEG", "PNG", "WebP"],
     maxFileSizeMB: 25,
-    keywords: ["crop image", "rotate photo", "aspect ratio crop"],
+    keywords: ["crop image", "rotate photo", "aspect ratio crop", "bulk crop images", "crop multiple images"],
     privacyNote: "Cropping happens locally in your browser. Nothing is uploaded.",
     faqs: [
       {
@@ -191,6 +191,16 @@ export const tools: ToolDefinition[] = [
       {
         question: "Can I rotate the image before cropping?",
         answer: "Yes, use the rotate buttons to rotate in 90° steps before or after selecting your crop area.",
+      },
+      {
+        question: "Can I crop multiple images at once?",
+        answer:
+          "Yes. Add several images and keep \"Apply crop & rotation to all images\" switched on — the crop area you draw is applied to every image in the same position. Turn it off to crop each image separately; after each crop the next image opens automatically.",
+      },
+      {
+        question: "Can I download all cropped images together?",
+        answer:
+          "Yes. Once your images are cropped, choose the download type (original, JPEG, PNG or WebP) and click \"Download all as ZIP\".",
       },
     ],
     relatedSlugs: ["image-compressor", "image-resizer", "image-to-pdf"],
@@ -223,6 +233,11 @@ export const tools: ToolDefinition[] = [
         question: "Does rotating reduce image quality?",
         answer:
           "PNG output is lossless. JPEG and WebP are re-encoded at high quality (92%), so any change is barely noticeable.",
+      },
+      {
+        question: "Can I download all rotated images at once, in a different format?",
+        answer:
+          "Yes. When the images are rotated, pick a download type — original format, JPEG, PNG or WebP — and click \"Download all as ZIP\".",
       },
     ],
     relatedSlugs: ["image-cropper", "image-resizer", "image-compressor"],
