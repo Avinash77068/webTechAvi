@@ -9,7 +9,7 @@ export function Brand({ className = "" }: { className?: string }) {
       className={`inline-flex shrink-0 items-center gap-2.5 ${className}`}
     >
       <Image
-        src="/logo.png"
+        src="/pwa-icon-192.png"
         alt=""
         width={32}
         height={32}
