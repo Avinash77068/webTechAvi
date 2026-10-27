@@ -16,6 +16,7 @@ import {
   PenLine,
   PenTool,
   RefreshCw,
+  RotateCw,
   ScanText,
   Scissors,
   SlidersHorizontal,
@@ -193,6 +194,38 @@ export const tools: ToolDefinition[] = [
       },
     ],
     relatedSlugs: ["image-compressor", "image-resizer", "image-to-pdf"],
+  },
+  {
+    slug: "image-rotator",
+    name: "Bulk Image Rotator",
+    shortDescription: "Rotate multiple photos at once by any angle.",
+    description:
+      "Add several images, select the ones you want, enter a rotation angle in degrees and rotate them all in one go. Download each image or everything as a ZIP.",
+    category: "image",
+    icon: RotateCw,
+    status: "available",
+    acceptedFormats: ["JPEG", "PNG", "WebP"],
+    maxFileSizeMB: 25,
+    keywords: ["rotate image", "rotate multiple images", "bulk rotate photos", "rotate jpg online"],
+    privacyNote: "Rotation happens locally in your browser using the Canvas API. Nothing is uploaded.",
+    faqs: [
+      {
+        question: "Can I rotate only some of the images I added?",
+        answer:
+          "Yes. Every image has a checkbox — untick the ones you want to leave alone, and only the selected images are rotated.",
+      },
+      {
+        question: "Can I rotate by an angle other than 90°?",
+        answer:
+          "Yes, type any angle between -360° and 360°. Positive values rotate clockwise and negative values counter-clockwise. For angles that aren't a multiple of 90°, the canvas grows so nothing is cropped; JPEG corners are filled white while PNG and WebP keep them transparent.",
+      },
+      {
+        question: "Does rotating reduce image quality?",
+        answer:
+          "PNG output is lossless. JPEG and WebP are re-encoded at high quality (92%), so any change is barely noticeable.",
+      },
+    ],
+    relatedSlugs: ["image-cropper", "image-resizer", "image-compressor"],
   },
   {
     slug: "image-to-text",
