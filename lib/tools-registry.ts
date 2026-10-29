@@ -49,6 +49,8 @@ export interface ToolDefinition {
   faqs: ToolFaq[];
   relatedSlugs: string[];
   popular?: boolean;
+  heading?: string;
+  metaDescription?: string;
 }
 
 export type ToolSearchEntry = Pick<
@@ -776,7 +778,17 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["MP4", "WebM"],
     maxFileSizeMB: 300,
-    keywords: ["extract audio from video", "video to mp3"],
+    keywords: [
+      "audio extractor",
+      "free audio extractor online",
+      "extract audio from video",
+      "sound extractor",
+      "audio extraction tool",
+      "video to mp3",
+    ],
+    heading: "Free Online Audio Extractor",
+    metaDescription:
+      "Extract audio from supported video files online with TechSutra's free audio extractor. Quickly extract sound from videos without installing software.",
     privacyNote: "Processing runs locally using ffmpeg.wasm.",
     faqs: [
       {
@@ -862,7 +874,7 @@ export function getRelatedTools(tool: ToolDefinition): ToolDefinition[] {
 }
 
 const seoTitles: Record<string, string> = {
-  "audio-extractor": "Extract Audio from Video Online Free (MP3)",
+  "audio-extractor": "Free Audio Extractor Online – Extract Audio Easily",
   "docx-editor": "Free Online DOCX Editor – Edit Word Files",
   "image-resizer": "Resize Image Online Free – Pixels & Presets",
   "organize-pdf": "Rotate & Reorder PDF Pages Online Free",

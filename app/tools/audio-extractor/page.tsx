@@ -7,7 +7,7 @@ const tool = getToolBySlug("audio-extractor")!;
 
 export const metadata = createPageMetadata({
   title: getToolSeoTitle(tool),
-  description: tool.shortDescription,
+  description: tool.metaDescription ?? tool.shortDescription,
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });

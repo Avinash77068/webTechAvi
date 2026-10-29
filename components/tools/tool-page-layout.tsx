@@ -79,7 +79,7 @@ export function ToolPageLayout({
                 />
               </div>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-                {tool.name} Online
+                {tool.heading ?? `${tool.name} Online`}
               </h1>
               <p className="hero-title-accent mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
                 Simple, Fast, Private.
@@ -150,7 +150,7 @@ export function ToolPageLayout({
 
       <div className="mt-5 max-w-4xl">
         <p className="text-[0.67rem] font-bold uppercase tracking-[0.16em] text-primary">{categoryMeta[tool.category].label}</p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{tool.name}</h1>
+        <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{tool.heading ?? tool.name}</h1>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">{tool.description}</p>
       </div>
 
