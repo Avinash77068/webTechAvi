@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Lock, Sparkles, Zap } from "lucide-react";
 import { Breadcrumbs } from "@/components/tools/breadcrumbs";
 import { PrivacyNote } from "@/components/tools/privacy-note";
+import { ToolGuideSection } from "@/components/tools/tool-guide-section";
 import { FaqSection } from "@/components/tools/faq-section";
 import { RelatedTools } from "@/components/tools/related-tools";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -130,6 +131,7 @@ export function ToolPageLayout({
           <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-[0_20px_64px_rgba(0,0,0,0.18)] sm:p-6">{children}</div>
           <div className="mt-14 space-y-10">
             {instructions}
+            <ToolGuideSection slug={tool.slug} name={tool.name} />
             <FaqSection faqs={tool.faqs} />
             <RelatedTools tools={related} />
           </div>
@@ -172,6 +174,7 @@ export function ToolPageLayout({
 
       <div className="mt-14 space-y-10">
         {instructions}
+        <ToolGuideSection slug={tool.slug} name={tool.name} />
         <FaqSection faqs={tool.faqs} />
         <RelatedTools tools={related} />
       </div>
