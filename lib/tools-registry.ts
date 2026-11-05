@@ -367,7 +367,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["JPEG", "PNG", "WebP"],
     maxFileSizeMB: 25,
-    keywords: ["image to pdf", "jpg to pdf", "photos to pdf", "convert images to pdf"],
+    keywords: ["image to pdf", "images to pdf", "jpg to pdf", "photos to pdf", "photo pdf", "convert images to pdf", "images into pdf format", "files into pdf"],
     privacyNote: "Your PDF is generated locally using pdf-lib. Images are never uploaded to a server.",
     faqs: [
       {
@@ -395,7 +395,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["merge pdf", "combine pdf files"],
+    keywords: ["merge pdf", "merge pdf documents", "merge pdf files free", "combine pdf files free", "merge pdf documents free", "pdf merge", "combine pdf files"],
     privacyNote: "Merging runs locally using pdf-lib. Your files are never uploaded to a server.",
     faqs: [
       {
@@ -424,7 +424,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["split pdf", "extract pdf pages"],
+    keywords: ["split pdf", "split pdf document", "extract pdf pages"],
     privacyNote: "Splitting runs locally using pdf-lib and PDF.js for page previews. Nothing is uploaded to a server.",
     faqs: [
       {
@@ -474,7 +474,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["edit pdf", "sign pdf", "pdf signature", "add text to pdf", "highlight pdf"],
+    keywords: ["edit pdf", "pdf document editor online", "edit pdf document free online", "online pdf editor free", "sign pdf", "pdf signature", "add text to pdf", "highlight pdf"],
     privacyNote:
       "Editing runs locally using pdf-lib and PDF.js. Your edits are drawn on top of the page, not merged into existing text.",
     faqs: [
@@ -516,7 +516,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["compress pdf", "reduce pdf size"],
+    keywords: ["compress pdf", "pdf compress", "pdf compressor", "pdf file compressor", "compressing pdf documents", "reduce pdf size"],
     privacyNote: "Compression runs locally using PDF.js and pdf-lib. We never claim a smaller file if the output is actually larger.",
     faqs: [
       {
@@ -629,7 +629,7 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["DOCX"],
     maxFileSizeMB: 20,
-    keywords: ["word to pdf", "docx to pdf"],
+    keywords: ["word to pdf", "docx to pdf", "pdf format converter", "pdf file format converter"],
     privacyNote: "Conversion runs locally. Complex Word layouts may not be fully preserved.",
     faqs: [
       {
@@ -883,12 +883,12 @@ const seoTitles: Record<string, string> = {
   "image-cropper": "Crop Image Online Free – Custom & Preset Ratios",
   "pdf-to-images": "Convert PDF to JPG or PNG Online Free",
   "photo-editor": "Free Online Photo Editor – Brighten, Crop & Adjust",
-  "image-to-pdf": "Convert JPG & PNG to PDF Online Free",
+  "image-to-pdf": "Images to PDF – Convert JPG & PNG to PDF Free",
   "pdf-text-extractor": "Extract Text from PDF Online Free (with OCR)",
-  "pdf-editor": "Edit & Sign PDF Online Free",
+  "pdf-editor": "PDF Editor Online Free – Edit & Sign PDF",
   "txt-editor": "Free Online Text Editor – Edit TXT Files",
   "signature-maker": "Free Signature Maker – Transparent PNG",
-  "split-pdf": "Split PDF Online Free – Extract Pages",
+  "split-pdf": "Split PDF Document Online Free – Extract Pages",
   "youtube-thumbnail": "YouTube Thumbnail Viewer & Downloader",
   "video-trimmer": "Trim Video Online Free in Your Browser",
 };

@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Brand } from "@/components/layout/brand";
 import { SearchBar } from "@/components/layout/search-bar";
@@ -27,8 +29,15 @@ export function MobileMenu({
   categories: MobileCategory[];
   searchTools: ToolSearchEntry[];
 }) {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         render={<Button variant="outline" size="icon" className="border-border bg-card/70 xl:hidden" aria-label="Open menu" />}
       >
@@ -40,7 +49,12 @@ export function MobileMenu({
             <Brand />
           </SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col gap-5 overflow-y-auto px-4 pb-6">
+        <div
+          className="flex flex-col gap-5 overflow-y-auto px-4 pb-6"
+          onClick={(event) => {
+            if ((event.target as Element).closest("a")) setOpen(false);
+          }}
+        >
           <div className="md:hidden">
             <SearchBar tools={searchTools} variant="compact" />
           </div>

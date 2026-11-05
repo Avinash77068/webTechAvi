@@ -6,9 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("merge-pdf")!;
 
 export const metadata = createPageMetadata({
-  title: "Merge PDF Files Online Free",
+  title: "Merge PDF Files Free – Combine PDF Documents Online",
   description:
-    "Merge PDF files online for free. Upload multiple PDFs, reorder them, then download one combined document processed in your browser.",
+    "Merge PDF files online for free. Combine PDF documents, reorder them, then download one merged PDF processed in your browser.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });

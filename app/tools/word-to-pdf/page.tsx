@@ -6,9 +6,9 @@ import { getToolBySlug } from "@/lib/tools-registry";
 const tool = getToolBySlug("word-to-pdf")!;
 
 export const metadata = createPageMetadata({
-  title: "Word to PDF Converter Online Free",
+  title: "Word to PDF – Free PDF Format Converter Online",
   description:
-    "Convert DOCX Word documents to PDF online for free. Upload a Word file and download the converted PDF from your browser.",
+    "Free PDF format converter: convert DOCX Word documents to PDF online. Upload a Word file and download the converted PDF from your browser.",
   path: `/tools/${tool.slug}`,
   keywords: tool.keywords,
 });
