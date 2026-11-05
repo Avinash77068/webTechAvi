@@ -99,6 +99,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <meta name="google-adsense-account" content="ca-pub-8212836769232178" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8212836769232178"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className="flex min-h-screen flex-col antialiased"
@@ -107,11 +112,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-VR3HJE41CZ"
         strategy="lazyOnload"
-      />
-      <Script
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8212836769232178"
-        strategy="lazyOnload"
-        crossOrigin="anonymous"
       />
       <Script id="google-analytics" strategy="lazyOnload">
         {`
