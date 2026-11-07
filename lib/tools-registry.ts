@@ -174,7 +174,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "image-cropper",
     name: "Image Cropper",
-    shortDescription: "Crop and rotate one or many images at once.",
+    shortDescription: "Crop and rotate images online, individually or in batches.",
     description:
       "Select the exact area you want to keep using interactive crop handles, choose a common aspect ratio and rotate your images. Crop several images in one go and download them all as a ZIP in JPEG, PNG or WebP.",
     category: "image",
@@ -182,7 +182,14 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["JPEG", "PNG", "WebP"],
     maxFileSizeMB: 25,
-    keywords: ["crop image", "rotate photo", "aspect ratio crop", "bulk crop images", "crop multiple images"],
+    keywords: [
+      "crop image",
+      "image crop online",
+      "rotate photo",
+      "aspect ratio crop",
+      "bulk crop images",
+      "crop multiple images",
+    ],
     privacyNote: "Cropping happens locally in your browser. Nothing is uploaded.",
     faqs: [
       {
@@ -247,7 +254,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "image-to-text",
     name: "Image to Text (OCR)",
-    shortDescription: "Extract text from images using on-device OCR.",
+    shortDescription: "Convert images to text online with on-device OCR.",
     description:
       "Upload a photo or screenshot containing text and extract it using Tesseract.js, an open-source OCR engine that runs entirely in your browser. Supports English and Hindi.",
     category: "image",
@@ -255,7 +262,17 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["JPEG", "PNG", "WebP", "BMP"],
     maxFileSizeMB: 20,
-    keywords: ["image to text", "ocr online", "extract text from image", "hindi ocr"],
+    keywords: [
+      "image to text",
+      "ocr online",
+      "online ocr converter",
+      "image ocr online",
+      "image to text ocr",
+      "jpg to ocr",
+      "ocr converter",
+      "extract text from image",
+      "hindi ocr",
+    ],
     privacyNote:
       "OCR runs fully on your device using Tesseract.js (WebAssembly). The language model is downloaded once and cached; your image is never uploaded.",
     faqs: [
@@ -367,7 +384,17 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["JPEG", "PNG", "WebP"],
     maxFileSizeMB: 25,
-    keywords: ["image to pdf", "images to pdf", "jpg to pdf", "photos to pdf", "photo pdf", "convert images to pdf", "images into pdf format", "files into pdf"],
+    keywords: [
+      "image to pdf",
+      "image to pdf converter free",
+      "images to pdf",
+      "jpg to pdf",
+      "photos to pdf",
+      "photo pdf",
+      "convert images to pdf",
+      "images into pdf format",
+      "files into pdf",
+    ],
     privacyNote: "Your PDF is generated locally using pdf-lib. Images are never uploaded to a server.",
     faqs: [
       {
@@ -424,7 +451,24 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["split pdf", "split pdf document", "extract pdf pages"],
+    keywords: [
+      "split pdf",
+      "split pdf online",
+      "split pdf online free",
+      "pdf splitter online free",
+      "pdf page splitter",
+      "pdf page separator",
+      "pdf page separator free",
+      "pdf cutter",
+      "pdf cutter online free",
+      "pdf separator online",
+      "online pdf separator",
+      "pdf split online free",
+      "pdf splitter free",
+      "cut pdf",
+      "split pdf document",
+      "extract pdf pages",
+    ],
     privacyNote: "Splitting runs locally using pdf-lib and PDF.js for page previews. Nothing is uploaded to a server.",
     faqs: [
       {
@@ -539,14 +583,20 @@ export const tools: ToolDefinition[] = [
   {
     slug: "pdf-to-images",
     name: "PDF to Images",
-    shortDescription: "Export PDF pages as JPG or PNG images.",
+    shortDescription: "Convert PDF pages to JPG or PNG images online.",
     description: "Render PDF pages using PDF.js and export the pages you select as JPG or PNG images.",
     category: "pdf",
     icon: Images,
     status: "available",
     acceptedFormats: ["PDF"],
     maxFileSizeMB: 50,
-    keywords: ["pdf to jpg", "pdf to png", "pdf page to image"],
+    keywords: [
+      "pdf to jpg",
+      "free pdf to jpg converter",
+      "pdf to image converter",
+      "pdf to png",
+      "pdf page to image",
+    ],
     privacyNote: "Rendering runs locally using PDF.js. Nothing is uploaded to a server.",
     faqs: [
       {
@@ -592,14 +642,24 @@ export const tools: ToolDefinition[] = [
   {
     slug: "docx-editor",
     name: "DOCX Document Editor",
-    shortDescription: "Write and edit documents, export as DOCX.",
+    shortDescription: "Edit Word (DOCX) documents online and download your work.",
     description: "A rich-text editor with headings, bold, italic, lists and alignment. Export a real DOCX file.",
     category: "document",
     icon: FileText,
     status: "available",
     acceptedFormats: ["DOCX"],
     maxFileSizeMB: 20,
-    keywords: ["docx editor", "word editor online"],
+    keywords: [
+      "docx editor",
+      "online docx editor",
+      "free online docx editor",
+      "docx online editor",
+      "edit docx",
+      "edit docx file online",
+      "word document editor online",
+      "online document editor",
+      "word editor online",
+    ],
     privacyNote: "Editing runs locally. Complex formatting, tables and headers may not round-trip perfectly.",
     faqs: [
       {
@@ -622,14 +682,23 @@ export const tools: ToolDefinition[] = [
   {
     slug: "word-to-pdf",
     name: "Word to PDF",
-    shortDescription: "Convert DOCX content into a PDF.",
+    shortDescription: "Convert a Word DOCX document to PDF online.",
     description: "Convert supported DOCX content into a PDF while preserving common formatting where feasible.",
     category: "document",
     icon: FileType,
     status: "available",
     acceptedFormats: ["DOCX"],
     maxFileSizeMB: 20,
-    keywords: ["word to pdf", "docx to pdf", "pdf format converter", "pdf file format converter"],
+    keywords: [
+      "word to pdf",
+      "word to pdf converter online",
+      "word to pdf converter online free",
+      "convert word to pdf online free",
+      "online word to pdf converter",
+      "docx to pdf",
+      "pdf format converter",
+      "pdf file format converter",
+    ],
     privacyNote: "Conversion runs locally. Complex Word layouts may not be fully preserved.",
     faqs: [
       {
@@ -652,14 +721,23 @@ export const tools: ToolDefinition[] = [
   {
     slug: "txt-editor",
     name: "TXT Editor",
-    shortDescription: "Open, edit and download plain text files.",
+    shortDescription: "Edit TXT and plain-text files online, then download them.",
     description: "Open or paste plain text, edit, search, clear, copy and download. Full Unicode and Hindi support.",
     category: "document",
     icon: Type,
     status: "available",
     acceptedFormats: ["TXT"],
     maxFileSizeMB: 10,
-    keywords: ["text editor online", "txt editor"],
+    keywords: [
+      "text editor online",
+      "txt editor",
+      "txt editor online",
+      "edit txt online",
+      "edit txt file",
+      "edit text file online",
+      "text file editor online",
+      "txt file editor",
+    ],
     privacyNote: "Everything happens locally in your browser.",
     faqs: [
       {
@@ -680,14 +758,25 @@ export const tools: ToolDefinition[] = [
   {
     slug: "csv-editor",
     name: "CSV Viewer and Editor",
-    shortDescription: "View and edit CSV files in a spreadsheet-like table.",
+    shortDescription: "Edit CSV files online in a spreadsheet-style table.",
     description: "Upload a CSV, edit it in a table, add or remove rows and columns, and export a correctly escaped CSV.",
     category: "document",
     icon: Table,
     status: "available",
     acceptedFormats: ["CSV"],
     maxFileSizeMB: 20,
-    keywords: ["csv editor", "csv viewer online"],
+    keywords: [
+      "csv editor",
+      "csv editor online",
+      "free csv editor",
+      "csv editor free",
+      "csv viewer online",
+      "online csv editor",
+      "csv online editor",
+      "edit csv online",
+      "edit csv file online",
+      "edit csv files online",
+    ],
     privacyNote: "Parsing and editing run locally in your browser.",
     faqs: [
       {
@@ -771,7 +860,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "audio-extractor",
     name: "Audio Extractor",
-    shortDescription: "Extract the audio track from a video file.",
+    shortDescription: "Extract audio from a video and download it as MP3, M4A or WAV.",
     description: "Extract the audio track from a local video file and download it in a supported format.",
     category: "video-audio",
     icon: AudioLines,
@@ -780,8 +869,14 @@ export const tools: ToolDefinition[] = [
     maxFileSizeMB: 300,
     keywords: [
       "audio extractor",
+      "audio extractor online",
       "free audio extractor online",
       "extract audio from video",
+      "extract audio from video online free",
+      "audio extractor from video online free",
+      "audio from video",
+      "separate audio from video",
+      "extract music from video",
       "sound extractor",
       "audio extraction tool",
       "video to mp3",
@@ -809,7 +904,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "youtube-thumbnail",
     name: "YouTube Thumbnail Viewer",
-    shortDescription: "View and download thumbnails from any YouTube video URL.",
+    shortDescription: "View and download available thumbnails from a YouTube video.",
     description:
       "Paste a YouTube video URL or ID to view its available thumbnail resolutions and open or download them.",
     category: "video-audio",
@@ -817,7 +912,13 @@ export const tools: ToolDefinition[] = [
     status: "available",
     acceptedFormats: ["YouTube URL or video ID"],
     maxFileSizeMB: 0,
-    keywords: ["youtube thumbnail downloader", "youtube thumbnail viewer"],
+    keywords: [
+      "youtube thumbnail downloader",
+      "youtube thumbnail downloader online",
+      "youtube thumbnail download free",
+      "youtube thumbnail viewer",
+      "youtube video thumbnail viewer",
+    ],
     privacyNote:
       "This tool only parses the URL you paste and links to thumbnail images already published by YouTube. No video is downloaded and nothing is uploaded.",
     faqs: [
@@ -889,6 +990,7 @@ const seoTitles: Record<string, string> = {
   "txt-editor": "Free Online Text Editor – Edit TXT Files",
   "signature-maker": "Free Signature Maker – Transparent PNG",
   "split-pdf": "Split PDF Document Online Free – Extract Pages",
+  "word-to-pdf": "Word to PDF Converter Online Free",
   "youtube-thumbnail": "YouTube Thumbnail Viewer & Downloader",
   "video-trimmer": "Trim Video Online Free in Your Browser",
 };
