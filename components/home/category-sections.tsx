@@ -48,7 +48,7 @@ export function CategorySections() {
                   ))}
                 </div>
               </section>
-              {index === 1 && <AdSlot placement="between-content" className="my-6" />}
+              {/* {index === 1 && <AdSlot placement="between-content" className="my-6" />} */}
             </Fragment>
           );
         })}

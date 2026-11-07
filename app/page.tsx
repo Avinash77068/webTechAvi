@@ -23,9 +23,9 @@ export default function HomePage() {
       <PopularTools />
       <CategorySections />
       <HowItWorks />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AdSlot placement="homepage-leaderboard" />
-      </div>
+      </div> */}
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
         <FaqSection faqs={homeFaqs} />
       </section>
