@@ -1,3 +1,4 @@
+import { convertKeywords } from "@/lib/seo-keywords";
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { ImageConverterTool } from "@/features/image-converter";
@@ -9,7 +10,7 @@ export const metadata = createPageMetadata({
   title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
-  keywords: tool.keywords,
+  keywords: [...tool.keywords, ...convertKeywords],
 });
 
 export default function ImageConverterPage() {

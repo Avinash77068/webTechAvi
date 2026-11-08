@@ -1,3 +1,4 @@
+import { photoKeywords } from "@/lib/seo-keywords";
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { PhotoEditorTool } from "@/features/photo-editor";
@@ -9,7 +10,7 @@ export const metadata = createPageMetadata({
   title: getToolSeoTitle(tool),
   description: tool.shortDescription,
   path: `/tools/${tool.slug}`,
-  keywords: tool.keywords,
+  keywords: [...tool.keywords, ...photoKeywords],
 });
 
 export default function PhotoEditorPage() {

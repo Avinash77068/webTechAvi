@@ -1,3 +1,4 @@
+import { compressKeywords } from "@/lib/seo-keywords";
 import { createPageMetadata } from "@/lib/page-metadata";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { ImageCompressorTool } from "@/features/image-compressor";
@@ -10,7 +11,7 @@ export const metadata = createPageMetadata({
   description:
     "Compress JPG, PNG and WebP images online for free. Adjust quality, compare file sizes and download smaller images processed in your browser.",
   path: `/tools/${tool.slug}`,
-  keywords: tool.keywords,
+  keywords: [...tool.keywords, ...compressKeywords],
 });
 
 export default function ImageCompressorPage() {
